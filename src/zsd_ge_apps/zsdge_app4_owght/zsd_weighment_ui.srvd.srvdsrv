@@ -1,0 +1,5 @@
+@EndUserText.label: 'Outgoing Weighment Recording - UI Apps'
+define service ZSD_WEIGHMENT_UI {
+  expose ZSD_CH_WEIGHT as WeighHead;
+  expose ZSD_CI_WEIGHT as WeighItem;
+}

@@ -1,0 +1,5 @@
+@EndUserText.label: 'Outgoing Gate Entry Exit - UI Apps'
+define service ZSD_GATE_EXIT_UI {
+  expose ZSD_CH_GEXIT as GateExitHead;
+  expose ZSD_CI_GEXIT as GateExitItem;
+}

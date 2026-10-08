@@ -1,0 +1,119 @@
+managed implementation in class zbp_mmge_app1_re unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZMMGE_APP1_RE alias GateSecEntry
+persistent table zmmge_hdr_t01
+draft table zmmge_app1_re_dt
+lock master total etag Lastchangedby
+authorization master ( instance )
+etag master Lastchangedby
+{
+  create ( authorization : global );
+  update;
+  delete;
+  field ( readonly, numbering : managed ) Uuid;
+  field ( mandatory : create )  Gateentryseries, Gateno;
+  field ( readonly ) Gateentryid, Gateentryiddate, Securityremarks, Createdname;
+  field ( mandatory ) Vehicleno, Vehicletype,Trasporterid,Licenseno,Engineno;
+  field ( features : instance ) Minepassno, Forestpassno;
+
+  draft action ( features : instance ) Edit;
+  draft action Activate optimized;
+  draft action Resume;
+  draft action Discard;
+  draft determine action Prepare;
+
+  determination head_modify on save { create; }
+  action ( features : instance ) PRINT result [1] $self;
+  validation gatenocheck on save { create; update; }
+
+  mapping for zmmge_hdr_t01 corresponding;
+//      {
+//        Uuid                        = uuid;
+//        GateNo                      = gateno;
+//        Gatenodes           = gatenodes;
+//        GateEntryNo                 = gateentryno;
+//        GateEntrySequenceNo         = gateentryseqno;
+//        GateEntryDate               = gateentrydate;
+//        GateEntryTime               = gateentrytime;
+//        GateEntryId                 = gateentryid;
+//        GateEntryIdDate             = gateentryiddate;
+//        Plant                       = plant;
+//        PlantName                   = plantname;
+//        GateEntrySeries             = gateentryseries;
+//        Gateentryseriesdes  = gateentryseriesdes;
+//        PermitNo                    = permitno;
+//        TokenEntryNo                = tokenentryno;
+//        ErpReferenceNo              = erpreferenceno;
+//        Trasporterid               = trasporterid;
+//        Transportname             = trasportername;
+//        VehicleNo                   = vehicleno;
+//        VehicleType                 = vehicletype;
+//        VehicleTypeDescription      = vehicletypedes;
+//        DriverName                  = drivername;
+//        Mobile                    = mobile;
+//        LicenseNo                   = licenseno;
+//        LicenseNo           = experiredt;
+//        Chaseno                   = chaseno;
+//        Address                     = address;
+//        ChallanNo                   = challanno;
+//        ChallanDate                 = challandate;
+//        LrNo                        = lrno;
+//        LrDate                      = lrdate;
+//        SecurityRemarks             = securityremarks;
+//        ReferenceNo                 = referno;
+//        ReferenceDate               = referdate;
+//        FromPlace                   = fromplace;
+//        ToPlace                     = toplace;
+//        FreightOrderNo              = freightorderno;
+//        HelperName                  = helpername;
+//        MinePassNo                  = minepassno;
+//        ForestPassNo                = forestpassno;
+//        RakeContainerNo             = rakecontno;
+//        CreatedByDisplayName        = createdname;
+//        WeighmentIndicator          = weighmentindicator;
+//        WeighmentMachineNo          = weighmentmcno;
+//        WeighmentMachineDescription = weighmentmcndes;
+//        WeightUnit                  = weighuom;
+//        GrossWeight                 = grosswt;
+//        TareWeight                  = tarewt;
+//        NetWeight                   = netwt;
+//        WeighmentDate               = weighmentdate;
+//        WeighmentTime               = weighmenttime;
+//        ImageValidationIndicator    = imagevaldindicator;
+//        ExitIndicator               = exitindicator;
+//        GateExitDate                = gateexitdate;
+//        GateExitTime                = gateexittime;
+//        GateExitIndicator           = gateexitindicator;
+//        GateIdStatus                = gateidstatus;
+//        GateIdName                  = gateidname;
+//        MaterialDocument            = materialdocument;
+//        MaterialDocumentYear        = materialdocumentyear;
+//        UnloadStartDate             = unloadstdate;
+//        UnloadStartTime             = unloadsttime;
+//        UnloadStartIndicator        = unloadstindi;
+//        UnloadEndDate               = unloadenddate;
+//        UnloadEndTime               = unloadendtime;
+//        UnloadEndIndicator          = unloadendindi;
+//        EntrySlipAttachment         = entryslipattcmt;
+//        EntrySlipMimeType           = entrymimetype;
+//        EntrySlipFileName           = entryfilename;
+//        WeighSlipAttachment         = weighslipattcmt;
+//        WeighSlipMimeType           = weighmimetype;
+//        WeighSlipFileName           = weighfilename;
+//        UnloadStartStatus           = unldstartsts;
+//        UnloadEndStatus             = unldendsts;
+//        CheckInStatus               = checkinstatus;
+//        GateEntryStatus             = gateentrystatus;
+//        MigoStatus                  = migostatus;
+//        ImageValidationStatus       = imagevalstatus;
+//        ExitStatus                  = exitstatus;
+//        NetWeightDecimal            = decnetwt;
+//        TareWeightDecimal           = dectarewt;
+//        CreatedBy                   = createdby;
+//        CreatedAt                   = createdat;
+//        LastChangedBy               = lastchangedby;
+//        LastChangedAt               = lastchangedat;
+//      }
+}

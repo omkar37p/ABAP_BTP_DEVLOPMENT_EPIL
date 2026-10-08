@@ -1,0 +1,98 @@
+@Metadata.layer: #CUSTOMER
+@UI: { headerInfo: {
+typeName: 'Dispatch Gate Item',
+typeNamePlural: 'Dispatch Gate Item',
+title: { type: #STANDARD, value: 'Material' }
+}}
+@UI.createHidden: true
+@UI.updateHidden: true
+@UI.deleteHidden: true
+annotate entity ZSD_CI_GEXIT with
+{
+  @UI.facet: [ { id: 'Header',
+                 purpose: #STANDARD,
+                 type: #IDENTIFICATION_REFERENCE,
+                 label: 'Dispatch Gate Item',
+                 position: 10 } ]
+  @UI.hidden: true
+  Uuid;
+
+  @UI: { lineItem:       [ { position: 10, label: 'Order Item' } ],
+         identification: [ { position: 10, label: 'Order Item' } ] }
+  @EndUserText.label: 'Order Item'
+  Salesitem;
+
+  @UI: { lineItem:       [ { position: 20, label: 'Material' } ],
+         identification: [ { position: 20, label: 'Material' } ] }
+  @EndUserText.label: 'Material'
+  Material;
+
+  @UI: { lineItem:       [ { position: 30, label: 'Material Des' } ],
+         identification: [ { position: 30, label: 'Material Des' } ] }
+  @EndUserText.label: 'Material Des'
+  Materialdesc;
+
+  @UI: { lineItem:       [ { position: 40, label: 'Customer' } ],
+         identification: [ { position: 40, label: 'Customer' } ] }
+  @EndUserText.label: 'Customer'
+  Customer;
+
+  @UI: { lineItem:       [ { position: 50, label: 'Order No' } ],
+         identification: [ { position: 50, label: 'Order No' } ] }
+  @EndUserText.label: 'Order No'
+  Salesdocument;
+
+  @UI: { lineItem:       [ { position: 60, label: 'Plant' } ],
+         identification: [ { position: 60, label: 'Plant' } ] }
+  @EndUserText.label: 'Plant'
+  Plant;
+
+  @UI: { lineItem:       [ { position: 70, label: 'Batch' } ],
+         identification: [ { position: 70, label: 'Batch' } ] }
+  @EndUserText.label: 'Batch'
+  Batch;
+
+  @UI: { lineItem:       [ { position: 80, label: 'Order Quantity' } ],
+         identification: [ { position: 80, label: 'Order Quantity' } ] }
+  @EndUserText.label: 'Order Quantity'
+  Quantity;
+
+  @UI: { lineItem:       [ { position: 90, label: 'Tare Weight' } ],
+         identification: [ { position: 90, label: 'Tare Weight' } ] }
+  @EndUserText.label: 'Tare Weight'
+  Tareweight;
+
+  @UI: { lineItem:       [ { position: 100, label: 'Gross Weight' } ],
+         identification: [ { position: 100, label: 'Gross Weight' } ] }
+  @EndUserText.label: 'Gross Weight'
+  Grossweight;
+
+  @UI: { lineItem:       [ { position: 110, label: 'Net Weight' } ],
+         identification: [ { position: 110, label: 'Net Weight' } ] }
+  @EndUserText.label: 'Net Weight'
+  Netweight;
+
+  @UI: { lineItem:       [ { position: 120, label: 'Remark' } ],
+         identification: [ { position: 120, label: 'Remark' } ] }
+  @EndUserText.label: 'Remark'
+  Remark;
+
+  @UI.hidden: true
+  Customername;
+  @UI.hidden: true
+  Gateentryno;
+  @UI.hidden: true
+  Plantname;
+  @UI.hidden: true
+  Baseunit;
+  @UI.hidden: true
+  Createdby;
+  @UI.hidden: true
+  Createdat;
+  @UI.hidden: true
+  Lastchangedby;
+  @UI.hidden: true
+  Lastchangedat;
+  @UI.hidden: true
+  _Head;
+}

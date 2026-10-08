@@ -1,0 +1,291 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: { typeName: 'Inward WeighMent - Apps',
+                typeNamePlural: 'Inward WeighMent - Apps',
+                title: { type: #STANDARD, label: 'Inward WeighMent - Apps', value: 'GateEntryStatus' },
+                description: { value: 'Gateentryno' } } }
+@UI.deleteHidden: true
+@UI.createHidden: true
+annotate entity ZMM_CH_WEIGHT with
+{
+  @UI.facet: [ { id: 'GeneralInfo',
+                 isSummary: true,
+                 label: 'Inward Entry - Details',
+                 type: #COLLECTION,
+                 purpose: #STANDARD },
+               { type: #FIELDGROUP_REFERENCE, targetQualifier: 'idSection1', parentId: 'GeneralInfo',
+                 position: 10, label: 'Gate Entry - Details', id: 'idSection1' },
+               { type: #FIELDGROUP_REFERENCE, targetQualifier: 'idSec2', parentId: 'GeneralInfo',
+                 position: 15, label: 'Vehicle - Details', id: 'idSec2' },
+               { type: #FIELDGROUP_REFERENCE, targetQualifier: 'idSec3', parentId: 'GeneralInfo',
+                 position: 20, label: 'Weighment Details', id: 'idSec3' },
+               { label: 'Document Information',
+                 id: 'invoiceInfo',
+                 purpose: #STANDARD,
+                 position: 12,
+                 type: #IDENTIFICATION_REFERENCE,
+                 targetQualifier: 'idSection2' },
+               { id: 'POItems',
+                 purpose: #STANDARD,
+                 type: #LINEITEM_REFERENCE,
+                 label: 'Order Item Details',
+                 position: 25,
+                 targetElement: '_Item' },
+               { id: 'CrtSts', purpose: #HEADER, type: #DATAPOINT_REFERENCE,
+                 position: 10, targetQualifier: 'UserSt' },
+               { id: 'WeiSts', purpose: #HEADER, type: #DATAPOINT_REFERENCE,
+                 position: 22, targetQualifier: 'WehSts' },
+               { id: 'WeiSts1', purpose: #HEADER, type: #DATAPOINT_REFERENCE,
+                 position: 20, targetQualifier: 'WehSts1' },
+               { id: 'UnlSts', purpose: #HEADER, type: #DATAPOINT_REFERENCE,
+                 position: 25, targetQualifier: 'UnSt' },
+               { id: 'Unlend', purpose: #HEADER, type: #DATAPOINT_REFERENCE,
+                 position: 28, targetQualifier: 'UnEnd' } ]
+
+  @EndUserText.label: 'Gate Entry No'
+  @UI.lineItem: [ { position: 10, label: 'Gate Entry No' } ]
+  @UI.identification: [ { position: 10, label: 'Gate Entry No' },
+//                        { type: #FOR_ACTION, dataAction: 'FirstImg', label: 'Entry Image Capture', position: 10 },
+//                        { type: #FOR_ACTION, dataAction: 'SecondImg', label: 'Exit Image Capture', position: 20 },
+                        { type: #FOR_ACTION, dataAction: 'AutoFetchWt', label: 'Auto Fetch Weight', position: 30 },
+  //                      { type: #FOR_ACTION, dataAction: 'AutoFetchtareWt', label: 'Auto Tare Weight', position: 35 },
+                        { type: #FOR_ACTION, dataAction: 'ManualFetchWt', label: 'Manual Weight', position: 40 },
+  //                      { type: #FOR_ACTION, dataAction: 'tarewtcapture', label: 'Tare Weight', position: 45 },
+                        { type: #FOR_ACTION, dataAction: 'Weighmentform', label: 'Weightment Slip', position: 50 },
+                        { type: #FOR_ACTION, dataAction: 'ImageValid', label: 'Image Approval', position: 60 } ]
+  @UI.selectionField: [ { position: 20 } ]
+  @UI.fieldGroup: [ { position: 10, qualifier: 'idSection1', importance: #HIGH } ]
+  Gateentryno;
+
+  @EndUserText.label: 'Series'
+  @UI.lineItem: [ { position: 20, label: 'Series' } ]
+  @UI.identification: [ { position: 20, label: 'Series' } ]
+  @UI.fieldGroup: [ { position: 20, qualifier: 'idSection1', importance: #HIGH } ]
+  @Consumption.valueHelpDefinition: [ { entity: { name: 'ZGATE_SERIES_VH', element: 'value_low' }, distinctValues: true } ]
+  Gateentryseries;
+
+  @EndUserText.label: 'Gate No'
+  @UI.lineItem: [ { position: 30, label: 'Gate No' } ]
+  @UI.identification: [ { position: 30, label: 'Gate No' } ]
+  @UI.fieldGroup: [ { position: 30, qualifier: 'idSection1', importance: #HIGH } ]
+  @Consumption.valueHelpDefinition: [ { entity: { name: 'ZGATE_NUM_VH', element: 'Gateno' },
+                                        additionalBinding: [ { localElement: 'Gatenodes', element: 'Gatenodes' } ] } ]
+  Gateno;
+
+  @EndUserText.label: 'Plant'
+  @UI.lineItem: [ { position: 40, label: 'Plant' } ]
+  @UI.identification: [ { position: 40, label: 'Plant' } ]
+  @UI.selectionField: [ { position: 10 } ]
+  @UI.fieldGroup: [ { position: 40, qualifier: 'idSection1', importance: #HIGH } ]
+  @Consumption.valueHelpDefinition: [ { entity: { name: 'ZMMGE_I_PLANTVH', element: 'Plant' },
+                                        additionalBinding: [ { localElement: 'Plantname', element: 'PlantName' } ] } ]
+  @UI.hidden: true
+  Plant;
+
+  @UI.lineItem: [ { position: 45, label: 'Gate Entry Date' } ]
+  @UI.identification: [ { position: 45, label: 'Gate Entry Date' } ]
+  @UI.fieldGroup: [ { position: 45, qualifier: 'idSection1', importance: #HIGH } ]
+  @EndUserText.label: 'Gate Entry Date'
+  @Consumption.filter: { selectionType: #INTERVAL, multipleSelections: false }
+  @UI.selectionField: [ { position: 30 } ]
+  Gateentrydate;
+
+  @EndUserText.label: 'Vehicle No'
+  @UI.identification: [ { position: 50, label: 'Vehicle No' } ]
+  @UI.lineItem: [ { position: 60, label: 'Vehicle No' } ]
+  @UI.fieldGroup: [ { position: 10, qualifier: 'idSec2', importance: #HIGH } ]
+  Vehicleno;
+
+  @EndUserText.label: 'Driver Name'
+  @UI.identification: [ { position: 60, label: 'Driver Name' } ]
+  @UI.fieldGroup: [ { position: 20, qualifier: 'idSec2', importance: #HIGH } ]
+  Drivername;
+
+  @EndUserText.label: 'Mobile'
+  @UI.identification: [ { position: 70, label: 'Mobile' } ]
+  @UI.fieldGroup: [ { position: 30, qualifier: 'idSec2', importance: #HIGH } ]
+  Mobile;
+
+  @EndUserText.label: 'Trasporter Id'
+  @UI.identification: [ { position: 80, label: 'Trasporter Id' } ]
+  @UI.fieldGroup: [ { position: 40, qualifier: 'idSec2', importance: #HIGH } ]
+  Trasporterid;
+
+  @EndUserText.label: 'Vehicle Type'
+  @UI.identification: [ { position: 85, label: 'Vehicle Type' } ]
+  @UI.fieldGroup: [ { position: 50, qualifier: 'idSec2', importance: #HIGH } ]
+  Vehicletype;
+
+  @EndUserText.label: 'License No'
+  @UI.identification: [ { position: 90, label: 'License No' } ]
+  @UI.fieldGroup: [ { position: 60, qualifier: 'idSec2', importance: #HIGH } ]
+  Licenseno;
+
+  @EndUserText.label: 'Expiry Date'
+  @UI.identification: [ { position: 95, label: 'Expiry Date' } ]
+  @UI.fieldGroup: [ { position: 70, qualifier: 'idSec2', importance: #HIGH } ]
+  Experiredt;
+
+  @EndUserText.label: 'Chassis No'
+  @UI.identification: [ { position: 100, label: 'Chassis No' } ]
+  @UI.fieldGroup: [ { position: 80, qualifier: 'idSec2', importance: #HIGH } ]
+  Chaseno;
+
+  @EndUserText.label: 'Weighment Machine'
+  @UI.lineItem: [ { position: 50, label: 'Weighment Machine' } ]
+  @UI.identification: [ { position: 110, label: 'Weighment Machine' } ]
+  @UI.fieldGroup: [ { position: 10, qualifier: 'idSec3', importance: #HIGH } ]
+  @Consumption.valueHelpDefinition: [ { entity: { name: 'ZMM_WEIGHMENT_VH', element: 'value_low' },
+                                        additionalBinding: [ { localElement: 'weighmentmcndes', element: 'text' } ] } ]
+  Weighmentmcno;
+
+  @EndUserText.label: 'Gross Weight'
+  @UI.identification: [ { position: 120, label: 'Gross Weight' } ]
+  @UI.fieldGroup: [ { position: 20, qualifier: 'idSec3', importance: #HIGH } ]
+  Grosswt;
+
+  @EndUserText.label: 'Tare Weight'
+  @UI.identification: [ { position: 124, label: 'Tare Weight' } ]
+  @UI.fieldGroup: [ { position: 30, qualifier: 'idSec3', importance: #HIGH } ]
+  DecTareWt;
+
+  @UI.hidden: true
+  Tarewt;
+
+  @EndUserText.label: 'Net Weight'
+  @UI.identification: [ { position: 127, label: 'Net Weight' } ]
+  @UI.fieldGroup: [ { position: 40, qualifier: 'idSec3', importance: #HIGH } ]
+  DecNetWt;
+
+  @UI.hidden: true
+  Netwt;
+
+  @EndUserText.label: 'Weighment Date'
+  @UI.lineItem: [ { position: 55, label: 'Weighment Date' } ]
+  @UI.identification: [ { position: 130, label: 'Weighment Date' } ]
+  @UI.fieldGroup: [ { position: 50, qualifier: 'idSec3', importance: #HIGH } ]
+  @UI.dataPoint: { qualifier: 'WehSts1', title: 'Weighment Date' }
+  Weighmentdate;
+
+  @EndUserText.label: 'Weighment Time'
+  @UI.identification: [ { position: 140, label: 'Weighment Time' } ]
+  @UI.fieldGroup: [ { position: 60, qualifier: 'idSec3', importance: #HIGH } ]
+  @UI.dataPoint: { qualifier: 'WehSts', title: 'Weighment Time' }
+  Weighmenttime;
+
+  @EndUserText.label: 'Permit No'
+  @UI.identification: [ { position: 10, label: 'Permit No', qualifier: 'idSection2' } ]
+  Permitno;
+
+  @EndUserText.label: 'From Place'
+  @UI.identification: [ { position: 15, label: 'From Place', qualifier: 'idSection2' } ]
+  Fromplace;
+
+  @EndUserText.label: 'To Place'
+  @UI.identification: [ { position: 20, label: 'To Place', qualifier: 'idSection2' } ]
+  Toplace;
+
+  @EndUserText.label: 'Ref No'
+  @UI.identification: [ { position: 30, label: 'Ref No', qualifier: 'idSection2' } ]
+  @UI.hidden: true
+  Referno;
+
+  @EndUserText.label: 'Ref Date'
+  @UI.identification: [ { position: 40, label: 'Ref Date', qualifier: 'idSection2' } ]
+  @UI.hidden: true
+  Referdate;
+
+  @EndUserText.label: 'LR No.'
+  @UI.identification: [ { position: 50, label: 'LR No.', qualifier: 'idSection2' } ]
+  Lrno;
+
+  @EndUserText.label: 'LR Date'
+  @UI.identification: [ { position: 60, label: 'LR Date', qualifier: 'idSection2' } ]
+  Lrdate;
+
+  @EndUserText.label: 'ERP Referenceno'
+  @UI.identification: [ { position: 70, label: 'ERP Referenceno', qualifier: 'idSection2' } ]
+  Erpreferenceno;
+
+  @EndUserText.label: 'Mine Passno'
+  @UI.identification: [ { position: 80, label: 'Mine Passno', qualifier: 'idSection2' } ]
+  Minepassno;
+
+  @EndUserText.label: 'Forest Passno'
+  @UI.identification: [ { position: 90, label: 'Forest Passno', qualifier: 'idSection2' } ]
+  Forestpassno;
+
+  @EndUserText.label: 'Security Remarks'
+  @UI.identification: [ { position: 100, label: 'Security Remarks', qualifier: 'idSection2' } ]
+  Securityremarks;
+
+  @EndUserText.label: 'Weighment Slip'
+  @UI.identification: [ { position: 110, label: 'Weighment Slip', qualifier: 'idSection2' } ]
+  Weighslipattcmt;
+
+//  @UI.dataPoint: { qualifier: 'UserSt', title: 'Created By' }
+//  Createdname;
+
+  @UI.dataPoint: { qualifier: 'UnSt', title: 'Unload Start Status' }
+  Unldstartsts;
+
+  @UI.dataPoint: { qualifier: 'UnEnd', title: 'Unload End Status' }
+  Unldendsts;
+
+  //  @UI.dataPoint: { qualifier: 'ImSts', title: 'Image Validation Status' }
+  //  ImageValStatus;
+
+  @UI.hidden: true
+  Weighfilename;
+  @UI.hidden: true
+  Weighmimetype;
+  @UI.hidden: true
+  weighmentmcndes;
+  @UI.hidden: true
+  Uuid;
+  @UI.hidden: true
+  Gatenodes;
+  @UI.hidden: true
+  Gateentryseqno;
+  @UI.hidden: true
+  Challanno;
+  @UI.hidden: true
+  Challandate;
+  @UI.hidden: true
+  Gateentrytime;
+  @UI.hidden: true
+  Gateentryid;
+  @UI.hidden: true
+  Gateentryiddate;
+  @UI.hidden: true
+  Plantname;
+  @UI.hidden: true
+  Gateentryseriesdes;
+  @UI.hidden: true
+  Tokenentryno;
+  @UI.hidden: true
+  Trasportername;
+  @UI.hidden: true
+  Address;
+  @UI.hidden: true
+  Freightorderno;
+  @UI.hidden: true
+  Helpername;
+  @UI.hidden: true
+  Rakecontno;
+  @UI.hidden: true
+  Weighmentindicator;
+  @UI.hidden: true
+  Imagevaldindicator;
+    @UI.dataPoint: { qualifier: 'UserSt', title: 'Created By' }
+  Createdby;
+  @UI.hidden: true
+  Createdat;
+  @UI.hidden: true
+  Lastchangedby;
+  @UI.hidden: true
+  Lastchangedat;
+  @UI.hidden: true
+  /* Associations */
+  _Item;
+}

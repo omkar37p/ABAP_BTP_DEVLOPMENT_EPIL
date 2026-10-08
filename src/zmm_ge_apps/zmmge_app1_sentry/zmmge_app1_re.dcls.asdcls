@@ -1,0 +1,9 @@
+@EndUserText.label: 'Security Entry App - Access control'
+@MappingRole: true
+define role ZMMGE_APP1_RE {
+    grant
+        select
+            on
+                ZMMGE_APP1_RE; 
+                
+}

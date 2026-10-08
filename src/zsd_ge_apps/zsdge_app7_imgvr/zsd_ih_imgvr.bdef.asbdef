@@ -1,0 +1,18 @@
+managed implementation in class zbp_sd_ih_imgvr unique;
+strict ( 2 );
+
+define behavior for ZSD_IH_IMGVR alias ImgVerify
+persistent table zsdge_sentry_ht1
+lock master
+authorization master ( instance )
+etag master Lastchangedat
+{
+  internal update;
+
+  field ( readonly ) Uuid;
+
+  action ( features : instance ) Approve result [1] $self;
+  action ( features : instance ) Reject parameter ZSD_IMGVR_REJ result [1] $self;
+
+  mapping for zsdge_sentry_ht1 corresponding;
+}

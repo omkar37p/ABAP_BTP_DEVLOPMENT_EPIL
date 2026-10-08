@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DOMA" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD01V>
+    <DOMNAME>ZMM_WT_NO</DOMNAME>
+    <DDLANGUAGE>E</DDLANGUAGE>
+    <DATATYPE>CHAR</DATATYPE>
+    <LENG>000015</LENG>
+    <OUTPUTLEN>000015</OUTPUTLEN>
+    <VALEXI>X</VALEXI>
+    <DDTEXT>Weighment Machine Number</DDTEXT>
+    <DOMMASTER>E</DOMMASTER>
+   </DD01V>
+   <DD07V_TAB>
+    <DD07V>
+     <DOMNAME>ZMM_WT_NO</DOMNAME>
+     <VALPOS>0001</VALPOS>
+     <DDLANGUAGE>E</DDLANGUAGE>
+     <DOMVALUE_L>WB-1</DOMVALUE_L>
+     <DDTEXT>Weighment Machine 1</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <DOMNAME>ZMM_WT_NO</DOMNAME>
+     <VALPOS>0002</VALPOS>
+     <DDLANGUAGE>E</DDLANGUAGE>
+     <DOMVALUE_L>WB-2</DOMVALUE_L>
+     <DDTEXT>Weighment Machine 2</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <DOMNAME>ZMM_WT_NO</DOMNAME>
+     <VALPOS>0003</VALPOS>
+     <DDLANGUAGE>E</DDLANGUAGE>
+     <DOMVALUE_L>WB-3</DOMVALUE_L>
+     <DDTEXT>Weighment Machine 3</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <DOMNAME>ZMM_WT_NO</DOMNAME>
+     <VALPOS>0004</VALPOS>
+     <DDLANGUAGE>E</DDLANGUAGE>
+     <DOMVALUE_L>WB-4</DOMVALUE_L>
+     <DDTEXT>Weighment Machine 4</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <DOMNAME>ZMM_WT_NO</DOMNAME>
+     <VALPOS>0005</VALPOS>
+     <DDLANGUAGE>E</DDLANGUAGE>
+     <DOMVALUE_L>WB-5</DOMVALUE_L>
+     <DDTEXT>Weighment Machine 5</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <DOMNAME>ZMM_WT_NO</DOMNAME>
+     <VALPOS>0006</VALPOS>
+     <DDLANGUAGE>E</DDLANGUAGE>
+     <DOMVALUE_L>WB-6</DOMVALUE_L>
+     <DDTEXT>Weighment Machine 6</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <DOMNAME>ZMM_WT_NO</DOMNAME>
+     <VALPOS>0007</VALPOS>
+     <DDLANGUAGE>E</DDLANGUAGE>
+     <DOMVALUE_L>WB-7</DOMVALUE_L>
+     <DDTEXT>Weighment Machine 7</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <DOMNAME>ZMM_WT_NO</DOMNAME>
+     <VALPOS>0008</VALPOS>
+     <DDLANGUAGE>E</DDLANGUAGE>
+     <DOMVALUE_L>WB-8.1</DOMVALUE_L>
+     <DDTEXT>Weighment Machine 8.1</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <DOMNAME>ZMM_WT_NO</DOMNAME>
+     <VALPOS>0009</VALPOS>
+     <DDLANGUAGE>E</DDLANGUAGE>
+     <DOMVALUE_L>WB-8.2</DOMVALUE_L>
+     <DDTEXT>Weighment Machine 8.2</DDTEXT>
+    </DD07V>
+    <DD07V>
+     <DOMNAME>ZMM_WT_NO</DOMNAME>
+     <VALPOS>0010</VALPOS>
+     <DDLANGUAGE>E</DDLANGUAGE>
+     <DOMVALUE_L>WB-8.3</DOMVALUE_L>
+     <DDTEXT>Weighment Machine 8.3</DDTEXT>
+    </DD07V>
+   </DD07V_TAB>
+  </asx:values>
+ </asx:abap>
+</abapGit>

@@ -1,0 +1,5 @@
+@EndUserText.label: 'Inventory Gate Entry - Apps UI'
+define service ZMMGE_APP2_SD {
+  expose ZMMGE_APP2_PE  as GateMainHead;
+  expose ZMMGE_APP2_PV1 as GateMainItem;
+}

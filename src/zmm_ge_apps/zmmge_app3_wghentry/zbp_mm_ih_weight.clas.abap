@@ -1,0 +1,7 @@
+CLASS zbp_mm_ih_weight DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zmm_ih_weight.
+ENDCLASS.
+
+
+CLASS zbp_mm_ih_weight IMPLEMENTATION.
+ENDCLASS.
+

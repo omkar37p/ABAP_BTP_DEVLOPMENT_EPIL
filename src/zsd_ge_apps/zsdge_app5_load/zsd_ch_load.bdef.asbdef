@@ -1,0 +1,26 @@
+projection;
+strict ( 2 );
+use draft;
+
+define behavior for ZSD_CH_LOAD alias LoadHead
+{
+  use update;
+
+  use action LoadSt;
+  use action Loadend;
+
+  use action Edit;
+  use action Activate;
+  use action Resume;
+  use action Discard;
+  use action Prepare;
+
+  use association _Item { with draft; }
+}
+
+define behavior for ZSD_CI_LOAD alias LoadItem
+{
+  use update;
+
+  use association _Head { with draft; }
+}

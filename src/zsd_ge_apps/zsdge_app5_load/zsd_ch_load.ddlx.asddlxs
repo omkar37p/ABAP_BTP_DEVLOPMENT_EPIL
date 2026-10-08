@@ -1,0 +1,218 @@
+@Metadata.layer: #CUSTOMER
+@UI: { headerInfo: {
+typeName: 'Outgoing Loading Yard - Apps',
+typeNamePlural: 'Outgoing Loading Yard - Apps',
+title: { type: #STANDARD, value: 'Gateentryno' }
+}}
+@UI.deleteHidden: true
+@UI.createHidden: true
+annotate entity ZSD_CH_LOAD with
+{
+  @UI.facet: [ { id: 'GeneralInfo',
+                 isSummary: true,
+                 label: 'Outward Entry - Details',
+                 type: #COLLECTION,
+                 purpose: #STANDARD },
+               { type: #FIELDGROUP_REFERENCE, targetQualifier: 'idSection1', parentId: 'GeneralInfo',
+                 position: 10, label: 'Gate Entry - Details', id: 'idSection1' },
+               { type: #FIELDGROUP_REFERENCE, targetQualifier: 'idSec2', parentId: 'GeneralInfo',
+                 position: 15, label: 'Unloading Information', id: 'idSec2' },
+               { id: 'Items',
+                 purpose: #STANDARD,
+                 type: #LINEITEM_REFERENCE,
+                 label: 'Order Item Details',
+                 position: 25,
+                 targetElement: '_Item' } ]
+  @UI.hidden: true
+  Uuid;
+
+  @EndUserText.label: 'Gate Entry No'
+  @EndUserText.quickInfo: 'Gate Entry No'
+  @UI.lineItem: [ { position: 10, label: 'Gate Entry No' } ]
+  @UI.identification: [ { position: 10, label: 'Gate Entry No' },
+                        { type: #FOR_ACTION, dataAction: 'LoadSt', label: 'Loading Started', position: 10 },
+                        { type: #FOR_ACTION, dataAction: 'Loadend', label: 'Loading Finished', position: 20 } ]
+  @UI.selectionField: [ { position: 10 } ]
+  @UI.fieldGroup: [ { position: 10, qualifier: 'idSection1', importance: #HIGH } ]
+  Gateentryno;
+
+  @UI.lineItem: [ { position: 20, label: 'Gate Entry Date' } ]
+  @UI.identification: [ { position: 20, label: 'Gate Entry Date' } ]
+  @UI.fieldGroup: [ { position: 20, qualifier: 'idSection1', importance: #HIGH } ]
+  @EndUserText.label: 'Gate Entry Date'
+  Gateentrydate;
+
+  @UI.lineItem: [ { position: 30, label: 'Gate Entry Type' } ]
+  @UI.identification: [ { position: 30, label: 'Gate Entry Type' } ]
+  @UI.fieldGroup: [ { position: 30, qualifier: 'idSection1', importance: #HIGH } ]
+  @EndUserText.label: 'Gate Entry Type'
+  @Consumption.valueHelpDefinition: [ { entity: { name: 'ZSD_TYPE_VH', element: 'value_low' }, distinctValues: true } ]
+  Gateentrytype;
+
+  @UI.lineItem: [ { position: 40, label: 'Gate No' } ]
+  @UI.identification: [ { position: 40, label: 'Gate No' } ]
+  @UI.fieldGroup: [ { position: 40, qualifier: 'idSection1', importance: #HIGH } ]
+  @EndUserText.label: 'Gate No'
+  @Consumption.valueHelpDefinition: [ { entity: { name: 'ZSD_GATENO_VH', element: 'value_low' }, distinctValues: true } ]
+  Gateno;
+
+  @UI.lineItem: [ { position: 50, label: 'Plant' } ]
+  @UI.identification: [ { position: 50, label: 'Plant' } ]
+  @UI.fieldGroup: [ { position: 50, qualifier: 'idSection1', importance: #HIGH } ]
+  @Consumption.valueHelpDefinition: [ { entity: { name: 'ZMMGE_I_PLANTVH', element: 'Plant' },
+                                        additionalBinding: [ { localElement: 'Plantname', element: 'PlantName' } ] } ]
+  @EndUserText.label: 'Plant'
+  Plant;
+
+  @EndUserText.label: 'Vehicle No'
+  @UI.lineItem: [ { position: 60, label: 'Vehicle No' } ]
+  @UI.identification: [ { position: 60, label: 'Vehicle No' } ]
+  @UI.fieldGroup: [ { position: 60, qualifier: 'idSection1', importance: #HIGH } ]
+  @UI.selectionField: [ { position: 20 } ]
+  Vehicleno;
+
+  @EndUserText.label: 'Loading Start Date'
+  @UI.identification: [ { position: 70, label: 'Loading Start Date' } ]
+  @UI.fieldGroup: [ { position: 10, qualifier: 'idSec2', importance: #HIGH } ]
+  Loadstdate;
+
+  @EndUserText.label: 'Loading Start Time'
+  @UI.identification: [ { position: 80, label: 'Loading Start Time' } ]
+  @UI.fieldGroup: [ { position: 20, qualifier: 'idSec2', importance: #HIGH } ]
+  Loadsttime;
+
+  @EndUserText.label: 'Loading Finished Date'
+  @UI.identification: [ { position: 90, label: 'Loading Finished Date' } ]
+  @UI.fieldGroup: [ { position: 30, qualifier: 'idSec2', importance: #HIGH } ]
+  Loadenddate;
+
+  @EndUserText.label: 'Loading Finished Time'
+  @UI.identification: [ { position: 100, label: 'Loading Finished Time' } ]
+  @UI.fieldGroup: [ { position: 40, qualifier: 'idSec2', importance: #HIGH } ]
+  Loadendtime;
+
+  @UI.hidden: true
+  Gatenodes;
+  @UI.hidden: true
+  Plantname;
+  @UI.hidden: true
+  Gateentryidtime;
+  @UI.hidden: true
+  Gateentrytypetext;
+  @UI.hidden: true
+  Gateentryid;
+  @UI.hidden: true
+  Gateentrysequence;
+  @UI.hidden: true
+  Gateentryiddate;
+  @UI.hidden: true
+  Gateentrytime;
+  @UI.hidden: true
+  Transportid;
+  @UI.hidden: true
+  Transportname;
+  @UI.hidden: true
+  Packingdetails;
+  @UI.hidden: true
+  Dispinstrdetails;
+  @UI.hidden: true
+  Contactdetails;
+  @UI.hidden: true
+  Drivername;
+  @UI.hidden: true
+  Driveraddress;
+  @UI.hidden: true
+  Driverlicensenumber;
+  @UI.hidden: true
+  Drivermobile;
+  @UI.hidden: true
+  Remarks;
+  @UI.hidden: true
+  Customer;
+  @UI.hidden: true
+  Customername;
+  @UI.hidden: true
+  Fromplace;
+  @UI.hidden: true
+  Billingfrom;
+  @UI.hidden: true
+  Consignee;
+  @UI.hidden: true
+  Billto;
+  @UI.hidden: true
+  Broker;
+  @UI.hidden: true
+  Doremark;
+  @UI.hidden: true
+  Division;
+  @UI.hidden: true
+  Attachment;
+  @UI.hidden: true
+  Mimetype;
+  @UI.hidden: true
+  Filename;
+  @UI.hidden: true
+  Weigmentindicator;
+  @UI.hidden: true
+  Weighmentindicator;
+  @UI.hidden: true
+  Weighmentmcno;
+  @UI.hidden: true
+  Weighmentmcndes;
+  @UI.hidden: true
+  Weighuom;
+  @UI.hidden: true
+  Tarewt;
+  @UI.hidden: true
+  Weighmentdate;
+  @UI.hidden: true
+  Weighmenttime;
+  @UI.hidden: true
+  Transferexit;
+  @UI.hidden: true
+  Gateexitdate;
+  @UI.hidden: true
+  Gateexittime;
+  @UI.hidden: true
+  Exitindic;
+  @UI.hidden: true
+  Imagevalid;
+  @UI.hidden: true
+  Deliveryno;
+  @UI.hidden: true
+  Materialdocument;
+  @UI.hidden: true
+  Materialdocumentyear;
+  @UI.hidden: true
+  Deliyindicator;
+  @UI.hidden: true
+  Pickqtyindicator;
+  @UI.hidden: true
+  Giindicator;
+  @UI.hidden: true
+  Billingdocument;
+  @UI.hidden: true
+  Billingdocumentdate;
+  @UI.hidden: true
+  Ewaybillno;
+  @UI.hidden: true
+  Ewaybilldate;
+  @UI.hidden: true
+  Einvoiceno;
+  @UI.hidden: true
+  Einvoicedate;
+  @UI.hidden: true
+  Loadstindi;
+  @UI.hidden: true
+  Loadendindi;
+  @UI.hidden: true
+  Createdby;
+  @UI.hidden: true
+  Createdat;
+  @UI.hidden: true
+  Lastchangedby;
+  @UI.hidden: true
+  Lastchangedat;
+  @UI.hidden: true
+  _Item;
+}

@@ -1,0 +1,5 @@
+@EndUserText.label: 'Incoming Gate Unloading Yard - UI Apps'
+define service ZMM_UNLOAD_UI {
+  expose ZMM_CH_UNLOAD as UNLHead;
+  expose ZMM_CI_UNLOAD as UNLItem;
+}

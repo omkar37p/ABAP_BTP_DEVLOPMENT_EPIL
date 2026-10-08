@@ -1,0 +1,5 @@
+CLASS lcx_bpztrp_vh DEFINITION INHERITING FROM cx_rap_query_provider.
+ENDCLASS.
+
+CLASS lcx_bpztrp_vh IMPLEMENTATION.
+ENDCLASS.

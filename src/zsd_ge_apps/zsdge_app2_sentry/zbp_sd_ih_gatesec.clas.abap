@@ -1,0 +1,6 @@
+CLASS zbp_sd_ih_gatesec DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zsd_ih_gatesec.
+ENDCLASS.
+
+
+CLASS zbp_sd_ih_gatesec IMPLEMENTATION.
+ENDCLASS.

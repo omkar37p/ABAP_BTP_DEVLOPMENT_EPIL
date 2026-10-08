@@ -1,0 +1,5 @@
+@EndUserText.label: 'Gate Security Entry - Apps UI'
+define service ZSD_GATESEC_UI {
+  expose ZSD_CH_GATESEC as GateSecHead;
+  expose ZSD_CI_GATESEC as GateSecItem;
+}

@@ -1,0 +1,209 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'Loading & ZMM_CH_UNLOADs',
+    typeNamePlural: 'Unloading Yard - Apps',
+    title: { type: #STANDARD, value: 'Gateentryno' }
+  }
+}
+@UI.deleteHidden: true
+@UI.createHidden: true
+annotate entity ZMM_CH_UNLOAD with
+{
+  @UI.facet: [ { id:        'GeneralInfo',
+                 isSummary: true,
+                 label:     'Inward Entry - Details',
+                 type:      #COLLECTION,
+                 purpose:   #STANDARD },
+               { type: #FIELDGROUP_REFERENCE, targetQualifier: 'idSection1', parentId: 'GeneralInfo',
+                 position: 10, label: 'Gate Entry - Details', id: 'idSection1' },
+               { type: #FIELDGROUP_REFERENCE, targetQualifier: 'idSec2', parentId: 'GeneralInfo',
+                 position: 15, label: 'Unloading Information', id: 'idSec2' },
+               { id:            'POItems',
+                 purpose:       #STANDARD,
+                 type:          #LINEITEM_REFERENCE,
+                 label:         'Order Item Details',
+                 position:      25,
+                 targetElement: '_Item' } ]
+  @UI.hidden: true
+  Uuid;
+
+  @EndUserText.label: 'Gate Entry No'
+  @EndUserText.quickInfo: 'Gate Entry No'
+  @UI.lineItem: [ { position: 10, label: 'Gate Entry No' } ]
+  @UI.identification: [ { position: 10, label: 'Gate Entry No' },
+                        { type: #FOR_ACTION, dataAction: 'Unloadst',  label: 'Unloading Started',  position: 10 },
+                        { type: #FOR_ACTION, dataAction: 'UnloadEnd', label: 'Unloading Finished', position: 20 } ]
+  @UI.selectionField: [ { position: 20 } ]
+  @UI.fieldGroup: [ { position: 10, qualifier: 'idSection1', importance: #HIGH } ]
+  Gateentryno;
+
+  @EndUserText.label: 'Series'
+  @UI.lineItem: [ { position: 20, label: 'Series' } ]
+  @UI.identification: [ { position: 20, label: 'Series' } ]
+  @UI.fieldGroup: [ { position: 20, qualifier: 'idSection1', importance: #HIGH } ]
+  @Consumption.valueHelpDefinition: [ { entity: { name: 'ZGATE_SERIES_VH', element: 'value_low' }, distinctValues: true } ]
+  Gateentryseries;
+
+  @EndUserText.label: 'Gate No'
+  @UI.lineItem: [ { position: 30, label: 'Gate No' } ]
+  @UI.identification: [ { position: 30, label: 'Gate No' } ]
+  @UI.fieldGroup: [ { position: 30, qualifier: 'idSection1', importance: #HIGH } ]
+  @Consumption.valueHelpDefinition: [ { entity: { name: 'ZGATE_NUM_VH', element: 'Gateno' },
+                                        additionalBinding: [ { localElement: 'Gatenodes', element: 'Gatenodes' } ] } ]
+  Gateno;
+
+  @EndUserText.label: 'Plant'
+  @UI.lineItem: [ { position: 40, label: 'Plant' } ]
+  @UI.identification: [ { position: 40, label: 'Plant' } ]
+  @UI.selectionField: [ { position: 10 } ]
+  @UI.fieldGroup: [ { position: 40, qualifier: 'idSection1', importance: #HIGH } ]
+  @Consumption.valueHelpDefinition: [ { entity: { name: 'ZMMGE_I_PLANTVH', element: 'Plant' },
+                                        additionalBinding: [ { localElement: 'Plantname', element: 'PlantName' } ] } ]
+  @UI.hidden: true
+  Plant;
+
+  @EndUserText.label: 'Vehicle No'
+  @UI.identification: [ { position: 50, label: 'Vehicle No' } ]
+  @UI.lineItem: [ { position: 50, label: 'Vehicle No' } ]
+  @UI.fieldGroup: [ { position: 50, qualifier: 'idSection1', importance: #HIGH } ]
+  Vehicleno;
+
+  @EndUserText.label: 'Unload Started Date'
+  @UI.identification: [ { position: 60, label: 'Unload Started Date' } ]
+  @UI.fieldGroup: [ { position: 20, qualifier: 'idSec2', importance: #HIGH } ]
+  Unloadstdate;
+
+  @EndUserText.label: 'Unload Started Time'
+  @UI.identification: [ { position: 70, label: 'Unload Started Time' } ]
+  @UI.fieldGroup: [ { position: 30, qualifier: 'idSec2', importance: #HIGH } ]
+  Unloadsttime;
+
+  @EndUserText.label: 'Unload Finished Date'
+  @UI.identification: [ { position: 80, label: 'Unload Finished Date' } ]
+  @UI.fieldGroup: [ { position: 40, qualifier: 'idSec2', importance: #HIGH } ]
+  Unloadenddate;
+
+  @EndUserText.label: 'Unload Finished Time'
+  @UI.identification: [ { position: 90, label: 'Unload Finished Time' } ]
+  @UI.fieldGroup: [ { position: 50, qualifier: 'idSec2', importance: #HIGH } ]
+  Unloadendtime;
+
+  @UI.hidden: true
+  Gatenodes;
+  @UI.hidden: true
+  Gateentryseqno;
+  @UI.hidden: true
+  Gateentrydate;
+  @UI.hidden: true
+  Gateentrytime;
+  @UI.hidden: true
+  Gateentryid;
+  @UI.hidden: true
+  Gateentryiddate;
+  @UI.hidden: true
+  Plantname;
+  @UI.hidden: true
+  Gateentryseriesdes;
+  @UI.hidden: true
+  Permitno;
+  @UI.hidden: true
+  Tokenentryno;
+  @UI.hidden: true
+  Erpreferenceno;
+  @UI.hidden: true
+  Trasporterid;
+  @UI.hidden: true
+  Trasportername;
+  @UI.hidden: true
+  Vehicletype;
+  @UI.hidden: true
+  Drivername;
+  @UI.hidden: true
+  Mobile;
+  @UI.hidden: true
+  Licenseno;
+  @UI.hidden: true
+  Experiredt;
+  @UI.hidden: true
+  Chaseno;
+  @UI.hidden: true
+  Address;
+  @UI.hidden: true
+  Challanno;
+  @UI.hidden: true
+  Challandate;
+  @UI.hidden: true
+  Lrno;
+  @UI.hidden: true
+  Lrdate;
+  @UI.hidden: true
+  Securityremarks;
+  @UI.hidden: true
+  Referno;
+  @UI.hidden: true
+  Referdate;
+  @UI.hidden: true
+  Fromplace;
+  @UI.hidden: true
+  Toplace;
+  @UI.hidden: true
+  Freightorderno;
+  @UI.hidden: true
+  Helpername;
+  @UI.hidden: true
+  Minepassno;
+  @UI.hidden: true
+  Forestpassno;
+  @UI.hidden: true
+  Rakecontno;
+  @UI.hidden: true
+  Createdname;
+  @UI.hidden: true
+  Weighmentindicator;
+  @UI.hidden: true
+  Weighmentmcno;
+  @UI.hidden: true
+  Weighmentmcndes;
+  @UI.hidden: true
+  Weighuom;
+  @UI.hidden: true
+  Grosswt;
+  @UI.hidden: true
+  Weighmentdate;
+  @UI.hidden: true
+  Weighmenttime;
+  @UI.hidden: true
+  Imagevaldindicator;
+  @UI.hidden: true
+  Exitindicator;
+  @UI.hidden: true
+  Gateexitdate;
+  @UI.hidden: true
+  Gateexittime;
+  @UI.hidden: true
+  Gateexitindicator;
+  @UI.hidden: true
+  Gateidstatus;
+  @UI.hidden: true
+  Gateidname;
+  @UI.hidden: true
+  Materialdocument;
+  @UI.hidden: true
+  Materialdocumentyear;
+  @UI.hidden: true
+  Unloadstindi;
+  @UI.hidden: true
+  Unloadendindi;
+  @UI.hidden: true
+  Createdby;
+  @UI.hidden: true
+  Createdat;
+  @UI.hidden: true
+  Lastchangedby;
+  @UI.hidden: true
+  Lastchangedat;
+  @UI.hidden: true
+  /* Associations */
+  _Item;
+}

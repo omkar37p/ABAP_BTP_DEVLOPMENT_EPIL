@@ -1,0 +1,28 @@
+projection;
+strict ( 2 );
+use draft;
+
+define behavior for ZSD_CH_GATESEC alias GateSecHead
+{
+  use create;
+  use update;
+  use delete;
+
+  use action GatePrint;
+
+  use action Edit;
+  use action Activate;
+  use action Resume;
+  use action Discard;
+  use action Prepare;
+
+  use association _Item { create; with draft; }
+}
+
+define behavior for ZSD_CI_GATESEC alias GateSecItem
+{
+  use update;
+  use delete;
+
+  use association _Header { with draft; }
+}

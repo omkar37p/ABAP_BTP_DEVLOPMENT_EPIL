@@ -1,0 +1,74 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'Inventory Gate Item',
+    typeNamePlural: 'Inventory Gate Item',
+    title: { type: #STANDARD, value: 'Material' }
+  }
+}
+@UI.deleteHidden: true
+@UI.createHidden: true
+@UI.updateHidden: true
+annotate entity ZMM_CI_UNLOAD with
+{
+  @UI.facet: [ { id:       'Header',
+                 purpose:  #STANDARD,
+                 type:     #IDENTIFICATION_REFERENCE,
+                 label:    'Inventory Item',
+                 position: 10 } ]
+  @UI.hidden: true
+  Uuid;
+
+  @UI: { lineItem:       [ { position: 10, label: 'Item Code' } ],
+         identification: [ { position: 10, label: 'Item Code' } ] }
+  @EndUserText.label: 'Item Code'
+  Material;
+
+  @UI: { lineItem:       [ { position: 20, label: 'Description' } ],
+         identification: [ { position: 20, label: 'Description' } ] }
+  @EndUserText.label: 'Description'
+  Materialtext;
+
+  @UI: { lineItem:       [ { position: 30, label: 'Unload Check' } ],
+         identification: [ { position: 30, label: 'Unload Check' } ] }
+  @EndUserText.label: 'Unload Check'
+  Unloadind;
+
+  @UI.hidden: true
+  Purchaseorder;
+  @UI.hidden: true
+  Purchaseorderitem;
+  @UI.hidden: true
+  Vendor;
+  @UI.hidden: true
+  Suppliername;
+  @UI.hidden: true
+  Gateentryno;
+  @UI.hidden: true
+  Plant;
+  @UI.hidden: true
+  Plantname;
+  @UI.hidden: true
+  Baseunit;
+  @UI.hidden: true
+  Quantity;
+  @UI.hidden: true
+  Remark;
+  @UI.hidden: true
+  Tareweight;
+  @UI.hidden: true
+  Grossweight;
+  @UI.hidden: true
+  Netweight;
+  @UI.hidden: true
+  Createdby;
+  @UI.hidden: true
+  Createdat;
+  @UI.hidden: true
+  Lastchangedby;
+  @UI.hidden: true
+  Lastchangedat;
+  @UI.hidden: true
+  /* Associations */
+  _Head;
+}

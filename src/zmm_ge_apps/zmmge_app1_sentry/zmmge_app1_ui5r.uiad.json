@@ -1,0 +1,34 @@
+{
+  "formatVersion": "2",
+  "header": {
+    "description": "Gate Entry Apps",
+    "originalLanguage": "en",
+    "abapLanguageVersion": "cloudDevelopment"
+  },
+  "generalInformation": {
+    "appType": "ui5",
+    "catalogId": "SAP_TC_UI5_REPO_UIAD",
+    "targetMappingTitle": "Inward Security Gate Entry"
+  },
+  "ui5AppDetails": {
+    "appId": "mmge_app1"
+  },
+  "navigation": {
+    "targetMappingId": "ZMMGE_APP1_UI5R_TM",
+    "semanticObject": "mmge_app1",
+    "action": "display",
+    "desktop": true,
+    "tablet": true,
+    "phone": true
+  },
+  "tiles": [
+    {
+      "id": "ZMMGE_APP1_UI5R_AL",
+      "tileType": "static",
+      "isDefault": true,
+      "standard": {
+        "title": "Inward Security Gate Entry"
+      }
+    }
+  ]
+}

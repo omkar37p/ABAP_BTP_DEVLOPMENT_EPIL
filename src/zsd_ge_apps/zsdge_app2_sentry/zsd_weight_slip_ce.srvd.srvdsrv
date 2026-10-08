@@ -1,0 +1,4 @@
+@EndUserText.label: 'Outgoing Gate Security SD - Apps'
+define service ZSD_WEIGHT_SLIP_CE {
+  expose ZSD_HCE_GATESEC as Weighment;
+}

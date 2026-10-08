@@ -1,0 +1,18 @@
+projection;
+strict ( 2 );
+use draft;
+
+define behavior for ZMMGE_APP1_PE alias GateSecEntry
+{
+  use create;
+  use update;
+  use delete;
+
+  use action PRINT;
+
+  use action Edit;
+  use action Activate;
+  use action Resume;
+  use action Discard;
+  use action Prepare;
+}

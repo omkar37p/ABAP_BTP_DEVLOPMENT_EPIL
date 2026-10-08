@@ -1,0 +1,5 @@
+@EndUserText.label: 'Sales Dispatch Planning UI Design'
+define service ZSD_DISPLAN_UI {
+  expose ZSD_CH_DISPLAN as DispHead;
+  expose ZSD_CI_DISPLAN as SalesOrder;
+}

@@ -1,0 +1,108 @@
+@AbapCatalog.viewEnhancementCategory: [#NONE]
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'Outgoing Gate Security Head - Apps'
+@Metadata.ignorePropagatedAnnotations: true
+@Metadata.allowExtensions: true
+define root view entity ZSD_CH_GATESEC
+  provider contract transactional_query
+  as projection on ZSD_IH_GATESEC
+{
+  key Uuid,
+      @ObjectModel.text.element: [ 'Gatenodes' ]
+      Gateno,
+      Gatenodes,
+      @ObjectModel.text.element: [ 'Plantname' ]
+      Plant,
+      Plantname,
+      Gateentryid,
+      Gateentryiddate,
+      Gateentryidtime,
+      @ObjectModel.text.element: [ 'Gateentrytypetext' ]
+      Gateentrytype,
+      Gateentrytypetext,
+      Gateentryno,
+      Gateentrysequence,
+      Gateentrydate,
+      Gateentrytime,
+      @ObjectModel.text.element: [ 'Transportname' ]
+      Transportid,
+      Transportname,
+      Vehicleno,
+      Packingdetails,
+      Dispinstrdetails,
+      Contactdetails,
+      Drivername,
+      Driveraddress,
+      Driverlicensenumber,
+      Drivermobile,
+      Remarks,
+      @ObjectModel.text.element: [ 'Customername' ]
+      Customer,
+      Customername,
+      Fromplace,
+      Toplace,
+      Billingfrom,
+      Consignee,
+      Billto,
+      Shipto,
+      Broker,
+      Doremark,
+      Stocktype,
+      Division,
+      @Semantics.largeObject: { mimeType: 'Mimetype',
+                                fileName: 'Filename',
+                                contentDispositionPreference: #INLINE }
+      Attachment,
+      Mimetype,
+      Filename,
+      Weigmentindicator,
+      Weighmentindicator,
+      Weighmentmcno,
+      Weighmentmcndes,
+      Weighuom,
+      @Semantics.quantity.unitOfMeasure: 'Weighuom'
+      Tarewt,
+      Weighmentdate,
+      Weighmenttime,
+      Transferexit,
+      Gateexitdate,
+      Gateexittime,
+      Exitindic,
+      Imagevalid,
+      Deliveryno,
+      Materialdocument,
+      Materialdocumentyear,
+      Deliyindicator,
+      Pickqtyindicator,
+      Giindicator,
+      Billingdocument,
+      Billingdocumentdate,
+      Ewaybillno,
+      Ewaybilldate,
+      Einvoiceno,
+      Einvoicedate,
+      Loadstdate,
+      Loadsttime,
+      Loadstindi,
+      Loadenddate,
+      Loadendtime,
+      Loadendindi,
+      Picqtindicator,
+      @ObjectModel.text.element: [ 'Modeoftransporttext' ]
+      Modeoftransport,
+      Modeoftransporttext,
+      Trandocno,
+      Trandocdate,
+      Vehicletype,
+      Vehicleengno,
+      Vehiclecapqty,
+      Chassisno,
+      Insuranceno,
+      Fitcertificate,
+      Createdby,
+      Createdat,
+      Lastchangedby,
+      Lastchangedat,
+      /* Associations */
+      _Item : redirected to composition child ZSD_CI_GATESEC
+}

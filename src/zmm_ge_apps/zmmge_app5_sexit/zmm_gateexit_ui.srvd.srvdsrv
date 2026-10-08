@@ -1,0 +1,5 @@
+@EndUserText.label: 'Incoming Gate Exit - Apps UI'
+define service ZMM_GATEEXIT_UI {
+  expose ZMM_CH_GEXIT as GateExitHead;
+  expose ZMM_CI_GEXIT as GateExitItem;
+}

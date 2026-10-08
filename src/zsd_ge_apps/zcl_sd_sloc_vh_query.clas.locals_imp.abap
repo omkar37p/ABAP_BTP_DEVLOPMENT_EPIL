@@ -1,0 +1,6 @@
+CLASS lcx_sloc_vh DEFINITION INHERITING FROM cx_rap_query_provider.
+ENDCLASS.
+
+CLASS lcx_sloc_vh IMPLEMENTATION.
+ENDCLASS.
+

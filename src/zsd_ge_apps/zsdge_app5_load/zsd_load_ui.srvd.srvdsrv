@@ -1,0 +1,5 @@
+@EndUserText.label: 'Outgoing Loading Yard - UI Apps'
+define service ZSD_LOAD_UI {
+  expose ZSD_CH_LOAD as LoadHead;
+  expose ZSD_CI_LOAD as LoadItem;
+}

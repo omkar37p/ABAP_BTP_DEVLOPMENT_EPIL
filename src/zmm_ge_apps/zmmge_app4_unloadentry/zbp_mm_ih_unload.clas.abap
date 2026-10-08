@@ -1,0 +1,7 @@
+CLASS zbp_mm_ih_unload DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zmm_ih_unload.
+ENDCLASS.
+
+
+CLASS zbp_mm_ih_unload IMPLEMENTATION.
+ENDCLASS.
+

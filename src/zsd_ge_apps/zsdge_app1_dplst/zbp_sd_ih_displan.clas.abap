@@ -1,0 +1,6 @@
+CLASS zbp_sd_ih_displan DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zsd_ih_displan.
+ENDCLASS.
+
+
+CLASS zbp_sd_ih_displan IMPLEMENTATION.
+ENDCLASS.

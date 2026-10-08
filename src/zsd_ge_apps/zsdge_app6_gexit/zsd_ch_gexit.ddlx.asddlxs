@@ -1,0 +1,256 @@
+@Metadata.layer: #CUSTOMER
+@UI: { headerInfo: {
+typeName: 'Dispatch Gate Exit - Apps',
+typeNamePlural: 'Dispatch Gate Exit - Apps',
+title: { type: #STANDARD, value: 'Gateentryno' }
+}}
+@UI.createHidden: true
+@UI.updateHidden: true
+@UI.deleteHidden: true
+annotate entity ZSD_CH_GEXIT with
+{
+  @UI.facet: [ { id: 'Header',
+                 isSummary: true,
+                 purpose: #STANDARD,
+                 type: #COLLECTION,
+                 label: 'Dispatch Gate Entry - Details',
+                 targetQualifier: 'idSection1' },
+               { type: #FIELDGROUP_REFERENCE, targetQualifier: 'idSection1', parentId: 'Header',
+                 position: 10, label: 'Gate Information', id: 'idSection1' },
+               { type: #FIELDGROUP_REFERENCE, targetQualifier: 'idSec2', parentId: 'Header',
+                 position: 15, label: 'Vehicle Information', id: 'idSec2' },
+               { type: #FIELDGROUP_REFERENCE, targetQualifier: 'idSec3', parentId: 'Header',
+                 position: 20, label: 'Gate Exit Information', id: 'idSec3' },
+               { label: 'Order Information',
+                 id: 'invoiceInfo1',
+                 purpose: #STANDARD,
+                 position: 25,
+                 type: #COLLECTION },
+               { type: #FIELDGROUP_REFERENCE, targetQualifier: 'idSection3', parentId: 'invoiceInfo1',
+                 position: 10, label: 'Basic Order Information', id: 'idSection3' },
+               { type: #FIELDGROUP_REFERENCE, targetQualifier: 'idSec4', parentId: 'invoiceInfo1',
+                 position: 15, label: 'Billing & E-Way Bill', id: 'idSec4' },
+               { id: 'SalesHead',
+                 purpose: #STANDARD,
+                 type: #LINEITEM_REFERENCE,
+                 label: 'Item & Loading Details',
+                 position: 30,
+                 targetElement: '_Item' } ]
+  @UI.hidden: true
+  Uuid;
+
+  @UI.lineItem: [ { position: 10, label: 'Gate Entry No' } ]
+  @UI.identification: [ { position: 10, label: 'Gate Entry No' },
+  //                      { type: #FOR_ACTION, dataAction: 'ImageVald', label: 'Image Validation', position: 10 },
+                        { type: #FOR_ACTION, dataAction: 'GateExit', label: 'Gate Exit Process', position: 20 } ]
+  @UI.fieldGroup: [ { position: 10, qualifier: 'idSection1', importance: #HIGH } ]
+  @EndUserText.label: 'Gate Entry No'
+  @UI.selectionField: [ { position: 10 } ]
+  Gateentryno;
+
+  @EndUserText.label: 'Gate Entry Date'
+  @UI.lineItem: [ { position: 20, label: 'Gate Entry Date' } ]
+  @UI.identification: [ { position: 20, label: 'Gate Entry Date' } ]
+  @UI.fieldGroup: [ { position: 30, qualifier: 'idSection1', importance: #HIGH } ]
+  Gateentrydate;
+
+  @EndUserText.label: 'Entry Time'
+  @UI.lineItem: [ { position: 40, label: 'Entry Time' } ]
+  @UI.identification: [ { position: 40, label: 'Entry Time' } ]
+  @UI.fieldGroup: [ { position: 40, qualifier: 'idSection1', importance: #HIGH } ]
+  Gateentrytime;
+
+  @EndUserText.label: 'Gate No'
+  @UI.lineItem: [ { position: 50, label: 'Gate No' } ]
+  @UI.identification: [ { position: 50, label: 'Gate No' } ]
+  @UI.fieldGroup: [ { position: 50, qualifier: 'idSection1', importance: #HIGH } ]
+  @UI.selectionField: [ { position: 20 } ]
+  Gateno;
+
+  @EndUserText.label: 'Gate Entry Type'
+  @UI.lineItem: [ { position: 60, label: 'Gate Entry Type' } ]
+  @UI.identification: [ { position: 60, label: 'Gate Entry Type' } ]
+  @UI.fieldGroup: [ { position: 60, qualifier: 'idSection1', importance: #HIGH } ]
+  Gateentrytype;
+
+  @EndUserText.label: 'Plant'
+  @UI.lineItem: [ { position: 70, label: 'Plant' } ]
+  @UI.identification: [ { position: 70, label: 'Plant' } ]
+  @UI.fieldGroup: [ { position: 70, qualifier: 'idSection1', importance: #HIGH } ]
+  @UI.selectionField: [ { position: 30 } ]
+  @Consumption.valueHelpDefinition: [ { entity: { name: 'ZMMGE_I_PLANTVH', element: 'Plant' } } ]
+  Plant;
+
+  @EndUserText.label: 'Transportid'
+  @UI.identification: [ { position: 80, label: 'Transportid' } ]
+  @UI.fieldGroup: [ { position: 10, qualifier: 'idSec2', importance: #HIGH } ]
+  Transportid;
+
+  @EndUserText.label: 'Vehicle No'
+  @UI.identification: [ { position: 90, label: 'Vehicle No' } ]
+  @UI.fieldGroup: [ { position: 20, qualifier: 'idSec2', importance: #HIGH } ]
+  Vehicleno;
+
+  @EndUserText.label: 'Contact Details'
+  @UI.identification: [ { position: 100, label: 'Contact Details' } ]
+  @UI.fieldGroup: [ { position: 30, qualifier: 'idSec2', importance: #HIGH } ]
+  Contactdetails;
+
+  @EndUserText.label: 'Driver Name'
+  @UI.identification: [ { position: 110, label: 'Driver Name' } ]
+  @UI.fieldGroup: [ { position: 40, qualifier: 'idSec2', importance: #HIGH } ]
+  Drivername;
+
+  @EndUserText.label: 'License Number'
+  @UI.identification: [ { position: 120, label: 'License Number' } ]
+  @UI.fieldGroup: [ { position: 50, qualifier: 'idSec2', importance: #HIGH } ]
+  Driverlicensenumber;
+
+  @EndUserText.label: 'Driver Mobile'
+  @UI.identification: [ { position: 130, label: 'Driver Mobile' } ]
+  @UI.fieldGroup: [ { position: 60, qualifier: 'idSec2', importance: #HIGH } ]
+  Drivermobile;
+
+  @EndUserText.label: 'Weighment Machine'
+  @UI.identification: [ { position: 140, label: 'Weighment Machine' } ]
+  @UI.fieldGroup: [ { position: 10, qualifier: 'idSec3', importance: #HIGH } ]
+  Weighmentmcno;
+
+  @EndUserText.label: 'Gate Exit Date'
+  @UI.lineItem: [ { position: 80, label: 'Gate Exit Date' } ]
+  @UI.identification: [ { position: 150, label: 'Gate Exit Date' } ]
+  @UI.fieldGroup: [ { position: 20, qualifier: 'idSec3', importance: #HIGH } ]
+  Gateexitdate;
+
+  @EndUserText.label: 'Gate Exit Time'
+  @UI.lineItem: [ { position: 90, label: 'Gate Exit Time' } ]
+  @UI.identification: [ { position: 160, label: 'Gate Exit Time' } ]
+  @UI.fieldGroup: [ { position: 30, qualifier: 'idSec3', importance: #HIGH } ]
+  Gateexittime;
+
+  @EndUserText.label: 'Customer'
+  @UI.identification: [ { position: 170, label: 'Customer' } ]
+  @UI.fieldGroup: [ { position: 10, qualifier: 'idSection3', importance: #HIGH } ]
+  Customer;
+
+  @EndUserText.label: 'Packing Details'
+  @UI.identification: [ { position: 180, label: 'Packing Details' } ]
+  @UI.fieldGroup: [ { position: 20, qualifier: 'idSection3', importance: #HIGH } ]
+  Packingdetails;
+
+  @EndUserText.label: 'Disp. Inst. Details'
+  @UI.identification: [ { position: 190, label: 'Disp. Inst. Details' } ]
+  @UI.fieldGroup: [ { position: 30, qualifier: 'idSection3', importance: #HIGH } ]
+  Dispinstrdetails;
+
+  @EndUserText.label: 'From Place'
+  @UI.identification: [ { position: 200, label: 'From Place' } ]
+  @UI.fieldGroup: [ { position: 40, qualifier: 'idSection3', importance: #HIGH } ]
+  Fromplace;
+
+  @EndUserText.label: 'Billing From'
+  @UI.identification: [ { position: 220, label: 'Billing From' } ]
+  @UI.fieldGroup: [ { position: 60, qualifier: 'idSection3', importance: #HIGH } ]
+  Billingfrom;
+
+  @EndUserText.label: 'Consignee'
+  @UI.identification: [ { position: 230, label: 'Consignee' } ]
+  @UI.fieldGroup: [ { position: 70, qualifier: 'idSection3', importance: #HIGH } ]
+  Consignee;
+
+  @EndUserText.label: 'Bill to'
+  @UI.identification: [ { position: 240, label: 'Bill to' } ]
+  @UI.fieldGroup: [ { position: 80, qualifier: 'idSection3' } ]
+  Billto;
+
+  @EndUserText.label: 'Invoice'
+  @UI.identification: [ { position: 270, label: 'Invoice' } ]
+  @UI.fieldGroup: [ { position: 10, qualifier: 'idSec4', importance: #HIGH } ]
+  Billingdocument;
+
+  @EndUserText.label: 'Invoice Date'
+  @UI.identification: [ { position: 280, label: 'Invoice Date' } ]
+  @UI.fieldGroup: [ { position: 20, qualifier: 'idSec4', importance: #HIGH } ]
+  Billingdocumentdate;
+
+  @EndUserText.label: 'E-Invoice No'
+  @UI.identification: [ { position: 290, label: 'E-Invoice No' } ]
+  @UI.fieldGroup: [ { position: 30, qualifier: 'idSec4', importance: #HIGH } ]
+  Einvoiceno;
+
+  @EndUserText.label: 'E-Invoice Date'
+  @UI.identification: [ { position: 300, label: 'E-Invoice Date' } ]
+  @UI.fieldGroup: [ { position: 40, qualifier: 'idSec4', importance: #HIGH } ]
+  Einvoicedate;
+
+  @EndUserText.label: 'E-Way Bill No'
+  @UI.identification: [ { position: 310, label: 'E-Way Bill No' } ]
+  @UI.fieldGroup: [ { position: 50, qualifier: 'idSec4', importance: #HIGH } ]
+  Ewaybillno;
+
+  @EndUserText.label: 'E-Way Bill Date'
+  @UI.identification: [ { position: 320, label: 'E-Way Bill Date' } ]
+  @UI.fieldGroup: [ { position: 60, qualifier: 'idSec4', importance: #HIGH } ]
+  Ewaybilldate;
+
+  @UI.hidden: true
+  Broker;
+  @UI.hidden: true
+  Doremark;
+  @UI.hidden: true
+  Division;
+  @UI.hidden: true
+  Gatenodes;
+  @UI.hidden: true
+  Plantname;
+  @UI.hidden: true
+  Gateentryid;
+  @UI.hidden: true
+  Gateentryiddate;
+  @UI.hidden: true
+  Gateentryidtime;
+  @UI.hidden: true
+  Gateentrytypetext;
+  @UI.hidden: true
+  Gateentrysequence;
+  @UI.hidden: true
+  Transportname;
+  @UI.hidden: true
+  Driveraddress;
+  @UI.hidden: true
+  Remarks;
+  @UI.hidden: true
+  Customername;
+  @UI.hidden: true
+  Attachment;
+  @UI.hidden: true
+  Mimetype;
+  @UI.hidden: true
+  Filename;
+  @UI.hidden: true
+  Weigmentindicator;
+  @UI.hidden: true
+  Weighmentindicator;
+  @UI.hidden: true
+  Weighmentmcndes;
+  @UI.hidden: true
+  Weighmentdate;
+  @UI.hidden: true
+  Weighmenttime;
+  @UI.hidden: true
+  Weighuom;
+  @UI.hidden: true
+  Tarewt;
+  @UI.hidden: true
+  Transferexit;
+  @UI.hidden: true
+  Createdby;
+  @UI.hidden: true
+  Createdat;
+  @UI.hidden: true
+  Lastchangedby;
+  @UI.hidden: true
+  Lastchangedat;
+  @UI.hidden: true
+  _Item;
+}

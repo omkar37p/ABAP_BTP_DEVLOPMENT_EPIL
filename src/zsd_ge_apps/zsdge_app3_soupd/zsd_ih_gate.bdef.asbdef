@@ -1,0 +1,62 @@
+managed implementation in class zbp_sd_ih_gate unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZSD_IH_GATE alias GateHead
+persistent table zsdge_sentry_ht1
+draft table zsdge_soupd_dht
+lock master
+total etag Lastchangedat
+authorization master ( instance )
+etag master Lastchangedat
+{
+  update ( features : instance );
+
+  field ( readonly ) Uuid, Gateno, Plant, Gateentrytype, Modeoftransport,
+  Gateentryid, Gateentryiddate, Gateentryidtime, Gateentryno, Division,
+  Modeoftransporttext, Gateentrytypetext, Gatenodes, Plantname,
+  Gateentrysequence, Gateentrytime, Gateentrydate, Customer, Customername,
+  Createdat, Createdby, Lastchangedat, Lastchangedby,
+  Attachment, Attachmentload, Filename, Filenameload, Mimetype, Mimetypeload,
+  Fromplace, Billingfrom, Billto, Consignee, Broker,
+  Cancelgateentry, Gateentrystatus, Criticality;
+
+  draft action ( features : instance ) Edit;
+  draft action Activate optimized;
+  draft action Resume;
+  draft action Discard;
+  draft determine action Prepare;
+
+  action ( features : instance ) SalesOrder parameter ZSD_ORDER result [1] $self;
+  action ( features : instance ) Print result [1] $self;
+  action ( features : instance ) GateCheckIn result [1] $self;
+  action ( features : instance ) CancelGateEntry result [1] $self;
+
+  side effects
+  {
+    action SalesOrder affects $self, entity _Item;
+  }
+
+  association _Item { create; with draft; }
+
+  mapping for zsdge_sentry_ht1 corresponding;
+}
+
+define behavior for ZSD_II_GATE alias GateItem
+persistent table zsdge_sentry_it1
+draft table zsdge_soupd_idt
+lock dependent by _Header
+authorization dependent by _Header
+{
+  update ( features : instance );
+  delete ( features : instance );
+
+  field ( readonly ) Uuid, Salesdocument, Salesitem, Customer, Customername, Plant, Plantname,
+  Gateentryno, Material, Materialdesc, Baseunit, Quantity, Tareweight,
+  Grossweight, Netweight, Createdat, Createdby, Lastchangedat, Lastchangedby,
+  OpenQty, Independentrequirementtype;
+
+  association _Header { with draft; }
+
+  mapping for zsdge_sentry_it1 corresponding;
+}

@@ -1,0 +1,40 @@
+projection;
+strict ( 2 );
+use draft;
+use side effects;
+
+define behavior for ZSD_CH_WEIGHT alias WeightHead
+{
+  use update;
+
+  use action Weighmentslip;
+  use action AutoFetchWt;
+  use action ManualFetchWt;
+  use action CrtDelivery;
+  use action PickingQty;
+  use action DeliveryPG;
+  use action TransExit;
+  use action RecaptureTare;
+  use action RecaptureGross;
+  use action CancelGateEntry;
+  use action UpDlyheadertext;
+
+  use action Edit;
+  use action Activate;
+  use action Resume;
+  use action Discard;
+  use action Prepare;
+
+  use association _Item { with draft; }
+}
+
+define behavior for ZSD_CI_WEIGHT alias WeightItem
+{
+  use update;
+
+  use action AutoFetchTWt;
+  use action ManualFetchTWt;
+  use action ImgCapture;
+
+  use association _Head { with draft; }
+}

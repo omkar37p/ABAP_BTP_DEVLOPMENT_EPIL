@@ -1,0 +1,73 @@
+@Metadata.layer: #CUSTOMER
+@UI: { headerInfo: { typeName: 'Dispatch Order - Details',
+                     typeNamePlural: 'Dispatch Order - Details',
+                     title: { type: #STANDARD, value: 'Salesorder' } } }
+annotate entity ZSD_CI_DISPLAN with
+{
+  @UI.facet: [ { id:       'Header',
+                 purpose:  #STANDARD,
+                 type:     #IDENTIFICATION_REFERENCE,
+                 label:    'Dispatch Order Details',
+                 position: 10 } ]
+  @UI.hidden: true
+  Uuid;
+  @UI: { lineItem:       [ { position: 10, label: 'Sl No.' } ],
+         identification: [ { position: 10, label: 'Sl No.' } ] }
+  @EndUserText.label: 'Sl No.'
+  Slno;
+  @UI: { lineItem:       [ { position: 20, label: 'Sales Order' } ],
+         identification: [ { position: 20, label: 'Sales Order' } ] }
+  @EndUserText.label: 'Sales Order'
+  Salesorder;
+  @UI: { lineItem:       [ { position: 30, label: 'Order Item' } ],
+         identification: [ { position: 30, label: 'Order Item' } ] }
+  @EndUserText.label: 'Order Item'
+  Salesorderitem;
+  @UI: { lineItem:       [ { position: 40, label: 'Dispatch Plan Date' } ],
+         identification: [ { position: 40, label: 'Dispatch Plan Date' } ] }
+  @EndUserText.label: 'Dispatch Plan Date'
+  Dispatchdate;
+  @UI: { lineItem:       [ { position: 50, label: 'Customer' } ],
+         identification: [ { position: 50, label: 'Customer' } ] }
+  @EndUserText.label: 'Customer'
+  Customer;
+  @UI: { lineItem:       [ { position: 60, label: 'Plant' } ],
+         identification: [ { position: 60, label: 'Plant' } ] }
+  @EndUserText.label: 'Plant'
+  Plant;
+  @UI: { lineItem:       [ { position: 65, label: 'Mode' } ],
+         identification: [ { position: 65, label: 'Mode' } ] }
+  @EndUserText.label: 'Mode'
+  Transmode;
+  @UI: { lineItem:       [ { position: 70, label: 'Item Code' } ],
+         identification: [ { position: 70, label: 'Item Code' } ] }
+  @EndUserText.label: 'Item Code'
+  Material;
+  @UI: { lineItem:       [ { position: 80, label: 'Base Unit' } ],
+         identification: [ { position: 80, label: 'Base Unit' } ] }
+  @EndUserText.label: 'Base Unit'
+  Baseunit;
+  @UI: { lineItem:       [ { position: 90, label: 'Total Order Qty' } ],
+         identification: [ { position: 90, label: 'Total Order Qty' } ] }
+  @EndUserText.label: 'Total Order Qty'
+  Totalorderqty;
+  @UI: { lineItem:       [ { position: 100, label: 'Dispatch Plan Qty' } ],
+         identification: [ { position: 100, label: 'Dispatch Plan Qty' } ] }
+  @EndUserText.label: 'Dispatch Plan Qty'
+  Dispplantqty;
+  @UI: { lineItem:       [ { position: 110, label: 'Vehicle No' } ],
+         identification: [ { position: 110, label: 'Vehicle No' } ] }
+  @EndUserText.label: 'Vehicle No'
+  Vehicleno;
+  @UI.hidden: true
+  Createdby;
+  @UI.hidden: true
+  Createdat;
+  @UI.hidden: true
+  Lastchangedby;
+  @UI.hidden: true
+  Lastchangedat;
+  @UI.hidden: true
+  /* Associations */
+  _Head;
+}

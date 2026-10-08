@@ -1,0 +1,5 @@
+CLASS lcx_soupd_vh DEFINITION INHERITING FROM cx_rap_query_provider.
+ENDCLASS.
+
+CLASS lcx_soupd_vh IMPLEMENTATION.
+ENDCLASS.

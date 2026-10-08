@@ -1,0 +1,27 @@
+projection;
+strict ( 2 );
+use draft;
+
+define behavior for ZMM_CH_UNLOAD alias UnloadHead
+{
+  use update;
+
+  use action Unloadst;
+  use action UnloadEnd;
+
+  use action Edit;
+  use action Activate;
+  use action Resume;
+  use action Discard;
+  use action Prepare;
+
+  use association _Item { create; with draft; }
+}
+
+define behavior for ZMM_CI_UNLOAD alias UnloadItem
+{
+  use update;
+  use delete;
+
+  use association _Head { with draft; }
+}

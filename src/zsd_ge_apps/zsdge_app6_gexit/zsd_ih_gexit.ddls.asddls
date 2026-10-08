@@ -1,0 +1,80 @@
+@AbapCatalog.viewEnhancementCategory: [#NONE]
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'Outgoing Gate Exit Head - Apps'
+@Metadata.ignorePropagatedAnnotations: true
+define root view entity ZSD_IH_GEXIT
+  as select from zsdge_sentry_ht1 as a
+  composition [0..*] of ZSD_II_GEXIT as _Item
+{
+  key a.uuid                as Uuid,
+      a.gateno              as Gateno,
+      a.gatenodes           as Gatenodes,
+      a.plant               as Plant,
+      a.plantname           as Plantname,
+      a.gateentryid         as Gateentryid,
+      a.gateentryiddate     as Gateentryiddate,
+      a.gateentryidtime     as Gateentryidtime,
+      a.gateentrytype       as Gateentrytype,
+      a.gateentrytypetext   as Gateentrytypetext,
+      a.gateentryno         as Gateentryno,
+      a.gateentrysequence   as Gateentrysequence,
+      a.gateentrydate       as Gateentrydate,
+      a.gateentrytime       as Gateentrytime,
+      a.transportid         as Transportid,
+      a.transportname       as Transportname,
+      a.vehicleno           as Vehicleno,
+      a.packingdetails      as Packingdetails,
+      a.dispinstrdetails    as Dispinstrdetails,
+      a.contactdetails      as Contactdetails,
+      a.drivername          as Drivername,
+      a.driveraddress       as Driveraddress,
+      a.driverlicensenumber as Driverlicensenumber,
+      a.drivermobile        as Drivermobile,
+      a.remarks             as Remarks,
+      a.customer            as Customer,
+      a.customername        as Customername,
+      a.fromplace           as Fromplace,
+      a.billingfrom         as Billingfrom,
+      a.consignee           as Consignee,
+      a.billto              as Billto,
+      a.broker              as Broker,
+      a.doremark            as Doremark,
+      a.division            as Division,
+      a.attachment          as Attachment,
+      @Semantics.mimeType: true
+      a.mimetype            as Mimetype,
+      a.filename            as Filename,
+      a.weigmentindicator   as Weigmentindicator,
+      a.weighmentindicator  as Weighmentindicator,
+      a.weighmentmcno       as Weighmentmcno,
+      a.weighmentmcndes     as Weighmentmcndes,
+      a.weighmentdate       as Weighmentdate,
+      a.weighmenttime       as Weighmenttime,
+      a.weighuom            as Weighuom,
+      @Semantics.quantity.unitOfMeasure: 'Weighuom'
+      a.tarewt              as Tarewt,
+      a.transferexit        as Transferexit,
+      a.gateexitdate        as Gateexitdate,
+      a.gateexittime        as Gateexittime,
+      a.exitindic           as Exitindic,
+      a.imagevalid          as Imagevalid,
+      a.billingdocument     as Billingdocument,
+      a.billingdocumentdate as Billingdocumentdate,
+      a.einvoiceno          as Einvoiceno,
+      a.einvoicedate        as Einvoicedate,
+      a.ewaybillno          as Ewaybillno,
+      a.ewaybilldate        as Ewaybilldate,
+      a.cancelgateentry     as Cancelgateentry,
+      @Semantics.user.createdBy: true
+      a.createdby           as Createdby,
+      @Semantics.systemDateTime.createdAt: true
+      a.createdat           as Createdat,
+      @Semantics.user.lastChangedBy: true
+      a.lastchangedby       as Lastchangedby,
+      @Semantics.systemDateTime.lastChangedAt: true
+      a.lastchangedat       as Lastchangedat,
+      _Item
+}
+where
+      a.transferexit    is not initial
+  and a.cancelgateentry is initial

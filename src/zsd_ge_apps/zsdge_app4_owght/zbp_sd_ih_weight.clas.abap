@@ -1,0 +1,8 @@
+CLASS zbp_sd_ih_weight DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zsd_ih_weight.
+ENDCLASS.
+
+
+
+CLASS zbp_sd_ih_weight IMPLEMENTATION.
+ENDCLASS.
+

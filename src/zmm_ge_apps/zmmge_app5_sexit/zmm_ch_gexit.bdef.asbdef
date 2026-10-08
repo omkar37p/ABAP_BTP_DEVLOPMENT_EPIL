@@ -1,0 +1,27 @@
+projection;
+strict ( 2 );
+use draft;
+
+define behavior for ZMM_CH_GEXIT alias GateExitHead
+{
+  use update;
+
+  use action GateExit;
+  use action ImageVald;
+
+  use action Edit;
+  use action Activate;
+  use action Resume;
+  use action Discard;
+  use action Prepare;
+
+  use association _Item { create; with draft; }
+}
+
+define behavior for ZMM_CI_GEXIT alias GateExitItem
+{
+  use update;
+  use delete;
+
+  use association _Head { with draft; }
+}

@@ -1,0 +1,251 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: { typeName: 'Inward Entry - Apps',
+                typeNamePlural: 'Inward Entry - Apps',
+                title: { type: #STANDARD, label: 'Inward Team Entry - Apps', value: 'GateEntryStatus' },
+                description: { value: 'Gateentryno' } } }
+@UI.createHidden: true
+annotate entity ZMMGE_APP2_PE with
+{
+  @UI.facet: [ { id: 'GeneralInfo',
+                 isSummary: true,
+                 label: 'Inward Entry - Details',
+                 type: #COLLECTION,
+                 purpose: #STANDARD },
+               { type: #FIELDGROUP_REFERENCE, targetQualifier: 'idSection1', parentId: 'GeneralInfo',
+                 position: 10, label: 'Gate Entry - Details', id: 'idSection1' },
+               { type: #FIELDGROUP_REFERENCE, targetQualifier: 'idSec2', parentId: 'GeneralInfo',
+                 position: 15, label: 'Vehicle - Information', id: 'idSec2' },
+               { label: 'Document Information',
+                 id: 'invoiceInfo',
+                 purpose: #STANDARD,
+                 position: 12,
+                 type: #IDENTIFICATION_REFERENCE,
+                 targetQualifier: 'idSection2' },
+               { id: 'POItems',
+                 purpose: #STANDARD,
+                 type: #LINEITEM_REFERENCE,
+                 label: 'Order Item Details',
+                 position: 25,
+                 targetElement: '_Item' },
+               { id: 'ChInSts', purpose: #HEADER, type: #DATAPOINT_REFERENCE,
+                 position: 10, targetQualifier: 'ChISts' },
+               { id: 'CrtSts', purpose: #HEADER, type: #DATAPOINT_REFERENCE,
+                 position: 20, targetQualifier: 'UserSt' } ]
+
+  @EndUserText.label: 'GateID No'
+  @UI.lineItem: [ { position: 10, label: 'GateID No' } ]
+  @UI.identification: [ { position: 10, label: 'GateID No' },
+                        { type: #FOR_ACTION, dataAction: 'Purchase', label: 'PO', position: 10 },
+                        { type: #FOR_ACTION, dataAction: 'GateCheckIn', label: 'Gate CheckIn', position: 20 },
+  //                      { type: #FOR_ACTION, dataAction: 'MigoPost', label: 'GR Post', position: 15 },
+                        { type: #FOR_ACTION, dataAction: 'GateSlipForm', label: 'Gate Entry Slip', position: 25 } ]
+  //                      { type: #FOR_ACTION, dataAction: 'WeightScrn', label: 'Weighment Screen', position: 30 }
+  @UI.selectionField: [ { position: 30 } ]
+  @UI.fieldGroup: [ { position: 10, qualifier: 'idSection1', importance: #HIGH } ]
+  Gateentryid;
+
+  @EndUserText.label: 'Gate Entry No'
+  @UI.lineItem: [ { position: 20, label: 'Gate Entry No' } ]
+  @UI.identification: [ { position: 20, label: 'Gate Entry No' } ]
+  @UI.selectionField: [ { position: 20 } ]
+  @UI.fieldGroup: [ { position: 20, qualifier: 'idSection1', importance: #HIGH } ]
+
+  Gateentryno;
+
+  @EndUserText.label: 'Gate Entry Date'
+  @UI.lineItem: [ { position: 30, label: 'Gate Entry Date' } ]
+  @UI.identification: [ { position: 30, label: 'Gate Entry Date' } ]
+  @UI.fieldGroup: [ { position: 30, qualifier: 'idSection1', importance: #HIGH } ]
+  Gateentrydate;
+
+  @EndUserText.label: 'Gate Entry Time'
+  @UI.lineItem: [ { position: 40, label: 'Gate Entry Time' } ]
+  @UI.identification: [ { position: 40, label: 'Gate Entry Time' } ]
+  @UI.fieldGroup: [ { position: 40, qualifier: 'idSection1', importance: #HIGH } ]
+  Gateentrytime;
+
+  @EndUserText.label: 'Series'
+  @UI.lineItem: [ { position: 50, label: 'Series' } ]
+  @UI.identification: [ { position: 50, label: 'Series' } ]
+  @UI.fieldGroup: [ { position: 50, qualifier: 'idSection1', importance: #HIGH } ]
+  @Consumption.valueHelpDefinition: [ { entity: { name: 'ZGATE_SERIES_VH', element: 'value_low' }, distinctValues: true } ]
+  Gateentryseries;
+
+  @EndUserText.label: 'Gate No'
+  @UI.lineItem: [ { position: 60, label: 'Gate No' } ]
+  @UI.identification: [ { position: 60, label: 'Gate No' } ]
+  @UI.fieldGroup: [ { position: 60, qualifier: 'idSection1', importance: #HIGH } ]
+  @Consumption.valueHelpDefinition: [ { entity: { name: 'ZGATE_NUM_VH', element: 'Gateno' },
+                                        additionalBinding: [ { localElement: 'Gatenodes', element: 'Gatenodes' } ] } ]
+  Gateno;
+
+  @EndUserText.label: 'Plant'
+  @UI.lineItem: [ { position: 70, label: 'Plant' } ]
+  @UI.identification: [ { position: 70, label: 'Plant' } ]
+  @UI.selectionField: [ { position: 10 } ]
+  @UI.fieldGroup: [ { position: 70, qualifier: 'idSection1', importance: #HIGH } ]
+  @Consumption.valueHelpDefinition: [ { entity: { name: 'ZMMGE_I_PLANTVH', element: 'Plant' },
+                                        additionalBinding: [ { localElement: 'Plantname', element: 'PlantName' } ] } ]
+  @UI.hidden: true                                        
+  Plant;
+
+  // Vehicle Information
+  @EndUserText.label: 'Vehicle No'
+  @UI.identification: [ { position: 80, label: 'Vehicle No' } ]
+  @UI.fieldGroup: [ { position: 10, qualifier: 'idSec2', importance: #HIGH } ]
+  Vehicleno;
+
+  @EndUserText.label: 'Driver Name'
+  @UI.identification: [ { position: 90, label: 'Driver Name' } ]
+  @UI.fieldGroup: [ { position: 20, qualifier: 'idSec2', importance: #HIGH } ]
+  Drivername;
+
+  @EndUserText.label: 'Mobile'
+  @UI.identification: [ { position: 100, label: 'Mobile' } ]
+  @UI.fieldGroup: [ { position: 30, qualifier: 'idSec2', importance: #HIGH } ]
+  Mobile;
+
+  @EndUserText.label: 'Trasporter Id'
+  @UI.identification: [ { position: 110, label: 'Trasporter Id' } ]
+  @UI.fieldGroup: [ { position: 40, qualifier: 'idSec2', importance: #HIGH } ]
+  @Consumption.valueHelpDefinition: [ { entity: { name: 'ZSD_BP_ZTRP_VH', element: 'Transporterid' },
+                                      additionalBinding: [ { localElement: 'Trasportername', element: 'Transportername',usage: #RESULT } ],
+                                      useForValidation: true } ]  
+  Trasporterid;
+
+  @EndUserText.label: 'Vehicle Type'
+  @UI.identification: [ { position: 120, label: 'Vehicle Type' } ]
+  @UI.fieldGroup: [ { position: 50, qualifier: 'idSec2', importance: #HIGH } ]
+    @Consumption.valueHelpDefinition: [{ entity: { name: 'ZGATE_VETYPE_VH', element: 'value_low' },
+  additionalBinding: [{localElement: 'VehicleTypeDescription', element: 'text'}]          }]  
+  Vehicletype;
+
+  @EndUserText.label: 'License No'
+  @UI.identification: [ { position: 130, label: 'License No' } ]
+  @UI.fieldGroup: [ { position: 60, qualifier: 'idSec2', importance: #HIGH } ]
+  Licenseno;
+
+  @EndUserText.label: 'Expiry Date'
+  @UI.identification: [ { position: 140, label: 'Expiry Date' } ]
+  @UI.fieldGroup: [ { position: 70, qualifier: 'idSec2', importance: #HIGH } ]
+  Experiredt;
+
+  @EndUserText.label: 'Chassis No'
+  @UI.identification: [ { position: 150, label: 'Chassis No' } ]
+  @UI.fieldGroup: [ { position: 80, qualifier: 'idSec2', importance: #HIGH } ]
+  Chaseno;
+
+  @EndUserText.label: 'Helper Name'
+  @UI.identification: [ { position: 160, label: 'Helper Name' } ]
+  @UI.fieldGroup: [ { position: 90, qualifier: 'idSec2', importance: #HIGH } ]
+  Helpername;
+
+  @EndUserText.label: 'Driver Address'
+  @UI.identification: [ { position: 170, label: 'Driver Address' } ]
+  @UI.fieldGroup: [ { position: 100, qualifier: 'idSec2', importance: #HIGH } ]
+  Address;
+
+  // Document Information
+  @EndUserText.label: 'Permit No'
+  @UI.identification: [ { position: 10, label: 'Permit No', qualifier: 'idSection2' } ]
+  Permitno;
+
+  @EndUserText.label: 'From Place'
+  @UI.identification: [ { position: 20, label: 'From Place', qualifier: 'idSection2' } ]
+  Fromplace;
+
+  @EndUserText.label: 'To Place'
+  @UI.identification: [ { position: 30, label: 'To Place', qualifier: 'idSection2' } ]
+  Toplace;
+
+  @EndUserText.label: 'Ref No'
+  @UI.identification: [ { position: 40, label: 'Ref No', qualifier: 'idSection2' } ]
+  @UI.hidden: true
+  Referno;
+
+  @EndUserText.label: 'Ref Date'
+  @UI.identification: [ { position: 50, label: 'Ref Date', qualifier: 'idSection2' } ]
+  @UI.hidden: true
+  Referdate;
+
+  @EndUserText.label: 'LR No'
+  @UI.identification: [ { position: 60, label: 'LR No', qualifier: 'idSection2' } ]
+  Lrno;
+
+  @EndUserText.label: 'LR Date'
+  @UI.identification: [ { position: 70, label: 'LR Date', qualifier: 'idSection2' } ]
+  Lrdate;
+
+  @EndUserText.label: 'Freight Orderno'
+  @UI.identification: [ { position: 80, label: 'Freight Order No', qualifier: 'idSection2' } ]
+  Freightorderno;
+
+  @EndUserText.label: 'ERP Referenceno'
+  @UI.identification: [ { position: 90, label: 'ERP Reference No', qualifier: 'idSection2' } ]
+  Erpreferenceno;
+
+  @EndUserText.label: 'Rake/Container No'
+  @UI.identification: [ { position: 100, label: 'Rake/Container No', qualifier: 'idSection2' } ]
+  Rakecontno;
+
+  @EndUserText.label: 'Mine Pass No'
+  @UI.identification: [ { position: 110, label: 'Mine Pass No', qualifier: 'idSection2' } ]
+  Minepassno;
+
+  @EndUserText.label: 'Forest Pass No'
+  @UI.identification: [ { position: 120, label: 'Forest Pass No', qualifier: 'idSection2' } ]
+  Forestpassno;
+
+  @EndUserText.label: 'Security Remarks'
+  @UI.identification: [ { position: 130, label: 'Security Remarks', qualifier: 'idSection2' } ]
+  Securityremarks;
+
+  @EndUserText.label: 'Gate Entry Slip'
+  @UI.identification: [ { position: 140, label: 'Gate Entry Slip', qualifier: 'idSection2' } ]
+  Entryslipattcmt;
+
+  @UI.dataPoint: { qualifier: 'ChISts', title: 'Gate ChechIn Status' }
+  CheckInStatus;
+
+//  @UI.dataPoint: { qualifier: 'UserSt', title: 'Created By' }
+  @UI.hidden: true
+  Createdname;
+
+  @UI.hidden: true
+  Challanno;
+  @UI.hidden: true
+  Challandate;
+  @UI.hidden: true
+  Entrymimetype;
+  @UI.hidden: true
+  Entryfilename;
+  @UI.hidden: true
+  Createdat;
+  @UI.hidden: true
+  Uuid;
+  @UI.hidden: true
+  Gatenodes;
+  @UI.hidden: true
+  Gateentryseqno;
+  @UI.hidden: true
+  Gateentryiddate;
+  @UI.hidden: true
+  Plantname;
+  @UI.hidden: true
+  Gateentryseriesdes;
+  @UI.hidden: true
+  Tokenentryno;
+  @UI.hidden: true
+  Trasportername;
+  @UI.hidden: true
+  Weighmentindicator;
+    @UI.dataPoint: { qualifier: 'UserSt', title: 'Created By' }  
+  Createdby;
+  @UI.hidden: true
+  Lastchangedby;
+  @UI.hidden: true
+  Lastchangedat;
+  @UI.hidden: true
+  _Item;
+}

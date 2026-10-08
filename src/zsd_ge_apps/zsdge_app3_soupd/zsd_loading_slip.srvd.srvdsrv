@@ -1,0 +1,4 @@
+@EndUserText.label: 'Gate Entry Apps SD - Dispatch'
+define service ZSD_LOADING_SLIP {
+  expose ZSD_CE_GATE as LOADINGSLIP;
+}

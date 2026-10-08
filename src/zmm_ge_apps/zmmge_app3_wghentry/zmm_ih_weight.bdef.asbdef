@@ -1,0 +1,76 @@
+managed implementation in class zbp_mm_ih_weight unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZMM_IH_WEIGHT alias WeightHead
+persistent table zmmge_hdr_t01
+draft table zmmge_wght_hd
+lock master
+total etag Lastchangedat
+authorization master ( instance )
+//etag master Lastchangedby
+{
+  update ( features : instance );
+  // create / delete: owned by the Gate Entry app (zmmge_hdr_t01 is shared)
+
+  field ( readonly ) Uuid;
+  field ( readonly ) Gateno, Gatenodes, Gateentryno, Gateentryseqno, Gateentrydate,
+  Gateentrytime, Gateentryid, Gateentryiddate, Plant, Plantname, Gateentryseries,
+  Gateentryseriesdes, Permitno, Tokenentryno,
+  Erpreferenceno, Trasporterid, Trasportername, Vehicleno, Vehicletype, Drivername,
+  Mobile, Licenseno, Experiredt, Chaseno, Address, Challanno, Challandate, Lrno,
+  Lrdate, Securityremarks, DecNetWt, DecTareWt,
+  Referno, Referdate, Fromplace, Toplace, Freightorderno, Helpername, Minepassno, Forestpassno, Rakecontno,
+  Createdname, Weighmentindicator, Weighmentmcno, weighmentmcndes, Weighuom,
+  Grosswt, Tarewt, Netwt, Weighmentdate, Weighmenttime, Imagevaldindicator, Createdby, Createdat,
+  Lastchangedby, Lastchangedat, GateEntryStatus, ImageValStatus, Weighslipattcmt, Weighfilename, Weighmimetype;
+
+  association _Item { create; with draft; }
+
+  draft action ( features : instance ) Edit;
+  draft action Activate optimized;
+  draft action Resume;
+  draft action Discard;
+  draft determine action Prepare;
+
+  action ( features : instance ) FirstImg result [1] $self;
+  action ( features : instance ) SecondImg result [1] $self;
+  action ( features : instance ) AutoFetchWt result [1] $self;
+  action ( features : instance ) ManualFetchWt parameter ZMM_WEIGHT_INP result [1] $self;
+  action ( features : instance ) ImageValid result [1] $self;
+  action ( features : instance ) Weighmentform result [1] $self;
+
+  side effects
+  {
+    action ManualFetchWt affects $self, entity _Item;
+  }
+
+  mapping for zmmge_hdr_t01 corresponding;
+}
+
+define behavior for ZMM_II_WEIGHT alias WeightItem
+persistent table zmmge_itm_t01
+draft table zmmge_wght_id
+lock dependent by _Head
+authorization dependent by _Head
+//etag master <field_name>
+{
+  update ( features : instance );
+  delete ( features : instance );
+
+  field ( readonly ) Uuid, Purchaseorder, Purchaseorderitem;
+  field ( readonly ) Vendor, Suppliername, Challanno, Challandate, Challantareweight, Challangrossweight, Challannetweight, Challanqty,
+  Gateentryno, Subgateentryno, Material, Materialtext, Plant, Plantname, Baseunit, Materialgroup,
+  Quantity, Remark, Tareweight, Grossweight, Poordertype, Poordertypetext, Ewaybillno, Ewaybilldate,
+  Createdby, Createdat, Lastchangedby, Lastchangedat, Orderdate, Qadocumt, Podocumt, Sidocumt, Chdocumt,
+  Gateentryseries, Weightindicator, Unloadind, Grnqty,Weighmentdate,Weighmenttime;
+  field ( features : instance ) Netweight;
+
+  association _Head { with draft; }
+
+  action ( features : instance ) AutoFetchTWt result [1] $self;
+  action ( features : instance ) ManualFetchTWt parameter ZMM_WGHT_INP result [1] $self;
+  action ( features : instance ) ImgCapture result [1] $self;
+
+  mapping for zmmge_itm_t01 corresponding;
+}

@@ -1,0 +1,169 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'Inward Security Entry',
+    typeNamePlural: 'Inward Security Entries',
+    title: { type: #STANDARD, value: 'GateIDName' },
+    description: {  value: 'Gateentryid' }
+  }
+}
+//@UI.deleteHidden: true
+annotate entity ZMMGE_APP1_PE with
+{
+
+  @UI.facet: [  { label: 'Inward - Security Gate Entry',  //                id: 'GeneralInfo',
+                purpose: #STANDARD,
+                position: 10
+  //                type: #IDENTIFICATION_REFERENCE,
+  //                targetQualifier: 'idSection1'
+                },
+    { id: 'Identification',   purpose: #STANDARD, type: #IDENTIFICATION_REFERENCE, label: 'General Information', position: 10 },
+    { id: 'References',      purpose: #STANDARD, type: #FIELDGROUP_REFERENCE, label: 'References & Permits',   position: 30, targetQualifier: 'References' },
+    { id: 'Transporter',      purpose: #STANDARD, type: #FIELDGROUP_REFERENCE, label: 'Vehicle & Transporter',  position: 20, targetQualifier: 'Transporter' },
+
+                        { id: 'GateIDSts', purpose: #HEADER, type: #DATAPOINT_REFERENCE,
+                          position: 10, targetQualifier: 'GateIDSt' },
+                        { id: 'CrtSts', purpose: #HEADER, type: #DATAPOINT_REFERENCE,
+                          position: 20, targetQualifier: 'UserSt' },
+                        { id: 'Crtdate', purpose: #HEADER, type: #DATAPOINT_REFERENCE,
+                          position: 30, targetQualifier: 'Cdate' }
+  ]
+  @UI.hidden: true
+  Uuid;
+
+  @EndUserText.label: 'Gate No'
+  @UI.lineItem: [ { position: 10, importance: #HIGH } ]
+  @UI.identification: [ { position: 40 } ]
+  @UI.selectionField: [{ position: 20 }]
+  @Consumption.filter: { selectionType: #SINGLE, multipleSelections: false }
+  @Consumption.valueHelpDefinition: [{ entity: { name: 'ZGATE_NUM_VH', element: 'value_low' },
+  additionalBinding: [{localElement: 'Gatenodes', element: 'text'}]          }]
+  GateNo;
+  @UI.lineItem: [ { position: 30 } ]
+  @UI.identification: [ { position: 30 } ]
+  @Consumption.filter: { selectionType: #SINGLE, multipleSelections: false }
+  @EndUserText.label: 'Plant'
+  @UI.selectionField: [{ position: 10 }]
+  @Consumption.valueHelpDefinition: [ {
+    entity: { name: 'ZMMGE_I_PLANTVH', element: 'Plant' },
+    additionalBinding: [ { localElement: 'PlantName', element: 'PlantName', usage: #RESULT } ],
+    useForValidation: true
+  } ]
+  @UI.hidden: true
+  Plant;
+  @UI.identification: [ { position: 50 } ]
+  @EndUserText.label: 'Series'
+  @UI.lineItem: [ { position: 50 , label: 'Series'} ]
+  @Consumption.filter: { selectionType: #SINGLE, multipleSelections: false }
+  @Consumption.valueHelpDefinition: [{ entity: { name: 'ZGATE_SERIES_VH', element: 'value_low' },distinctValues: true }]
+  GateEntrySeries;
+  @EndUserText.label: 'Gate ID'
+  @UI.identification: [ { position: 10 } ]
+  @UI.lineItem: [ { position: 10 , label: 'Gate ID'} ]
+  @UI.dataPoint:{ qualifier: 'UserSt',title: 'Gate ID' }
+  GateEntryId;
+  @EndUserText.label: 'Gate ID Date'
+  @UI.identification: [ { position: 20 } ]
+  @UI.lineItem: [ { position: 20 , label: 'Gate ID Date'} ]
+  @UI.selectionField: [{ position: 30 }]
+  @Consumption.filter:{ selectionType: #INTERVAL,multipleSelections: false }
+  GateEntryIdDate;
+
+  @UI.lineItem: [ { position: 60 } ]
+  @UI.fieldGroup: [ { position: 10, qualifier: 'Transporter' } ]
+  @EndUserText.label: 'Trasporter Id'
+  @Consumption.valueHelpDefinition: [ { entity: { name: 'ZSD_BP_ZTRP_VH', element: 'Transporterid' },
+                                      additionalBinding: [ { localElement: 'Transportname', element: 'Transportername',usage: #RESULT } ],
+                                      useForValidation: true } ]
+  
+  Trasporterid;
+  @UI.fieldGroup: [ { position: 15, qualifier: 'Transporter' } ]
+  @EndUserText.label: 'Transporter Name'
+  Transportname;
+  @UI.lineItem: [ { position: 70, importance: #HIGH } ]
+  @UI.fieldGroup: [ { position: 20, qualifier: 'Transporter' } ]
+  @EndUserText.label: 'Vehicle No'
+  VehicleNo;
+  @UI.lineItem: [ { position: 80, importance: #HIGH } ]
+  @UI.fieldGroup: [ { position: 30, qualifier: 'Transporter' } ]
+  @EndUserText.label: 'Vehicle Type'
+    @Consumption.valueHelpDefinition: [{ entity: { name: 'ZGATE_VETYPE_VH', element: 'value_low' },
+  additionalBinding: [{localElement: 'VehicleTypeDescription', element: 'text'}]          }]
+  VehicleType;
+  @UI.lineItem: [ { position: 90 } ]
+  @UI.fieldGroup: [ { position: 40, qualifier: 'Transporter' } ]
+  @EndUserText.label: 'Driver Name'
+  DriverName;
+  @UI.fieldGroup: [ { position: 50, qualifier: 'Transporter' } ]
+  @EndUserText.label: 'Mobile No'
+  Mobile;
+  @UI.fieldGroup: [ { position: 60, qualifier: 'Transporter' } ]
+  @EndUserText.label: 'License No'
+  LicenseNo;
+  @UI.fieldGroup: [ { position: 70, qualifier: 'Transporter' } ]
+  @EndUserText.label: 'License Expiry Date'
+  Experiredt;
+  @UI.fieldGroup: [ { position: 80, qualifier: 'Transporter' } ]
+  @EndUserText.label: 'Chassis No'
+  Chaseno;
+  @UI.fieldGroup: [ { position: 90, qualifier: 'Transporter' } ]
+  @EndUserText.label: 'Address'
+  Address;
+  @UI.fieldGroup: [ { position: 100, qualifier: 'Transporter' } ]
+  @EndUserText.label: 'Helper Name'
+  HelperName;
+  @UI.fieldGroup: [ { position: 110, qualifier: 'Transporter' } ]
+  @EndUserText.label: 'Engine No'  
+  Engineno;
+
+  @UI.fieldGroup: [ { position: 10, qualifier: 'References' } ]
+  @EndUserText.label: 'Permit No'
+  PermitNo;
+  @UI.fieldGroup: [ { position: 20, qualifier: 'References' } ]
+  @EndUserText.label: 'Fromplace'
+  FromPlace;
+  @UI.fieldGroup: [ { position: 30, qualifier: 'References' } ]
+  @EndUserText.label: 'Toplace'
+  ToPlace;
+  //  @UI.fieldGroup: [ { position: 40, qualifier: 'References' } ]
+  //  @EndUserText.label: 'Challan No'
+  @UI.hidden: true
+  ChallanNo;
+  //  @UI.fieldGroup: [ { position: 70, qualifier: 'References' } ]
+  //  @EndUserText.label: 'Challan Date'
+  @UI.hidden: true
+  ChallanDate;
+  @UI.fieldGroup: [ { position: 40, qualifier: 'References' } ]
+  @EndUserText.label: 'LR No'
+  LrNo;
+  @UI.fieldGroup: [ { position: 50, qualifier: 'References' } ]
+  @EndUserText.label: 'LR Date'
+  LrDate;
+  @UI.fieldGroup: [ { position: 60, qualifier: 'References' } ]
+  @EndUserText.label: 'Freight OrderNo'
+  FreightOrderNo;
+  @UI.fieldGroup: [ { position: 70, qualifier: 'References' } ]
+  @EndUserText.label: 'ERP Ref No'
+  ErpReferenceNo;
+  @UI.fieldGroup: [ { position: 130, qualifier: 'References' } ]
+  @UI.hidden: true
+  RakeContainerNo;
+  @UI.fieldGroup: [ { position: 110, qualifier: 'References' } ]
+  @EndUserText.label: 'Mine Pass No'
+  MinePassNo;
+  @UI.fieldGroup: [ { position: 120, qualifier: 'References' } ]
+  @EndUserText.label: 'Forest Pass No'
+  ForestPassNo;
+  @UI.fieldGroup: [ { position: 10, qualifier: 'SecurityCheckIn' } ]
+  @EndUserText.label: 'Security Remark'
+  SecurityRemarks;
+  @UI.dataPoint:{ qualifier: 'GateIDSt',title: 'Gate ID Status' }
+  GateIdStatus;
+//  @UI.dataPoint:{ qualifier: 'UserSt',title: 'Created By' }
+//  Createdname;
+  @UI.dataPoint:{ qualifier: 'Cdate',title: 'Creation Date - Time' }
+  CreatedAt;
+  @UI.hidden: true
+  Gatenodes;
+
+}

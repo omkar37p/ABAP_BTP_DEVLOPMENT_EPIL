@@ -1,0 +1,57 @@
+managed implementation in class zbp_sd_ih_displan unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZSD_IH_DISPLAN alias DispHead
+persistent table zsdge_dplst_ht1
+draft table zsdge_dplst_dht1
+lock master
+total etag Lastchangedat
+authorization master ( instance )
+etag master Lastchangedat
+{
+  create ( authorization : global );
+  update ( features : instance );
+  delete ( features : instance );
+
+  field ( readonly, numbering : managed ) Uuid;
+  field ( readonly ) Createdat, Createdby, Lastchangedat, Lastchangedby, Filename, Minetype,
+                     Status, UploadStatus, PersonFullName;
+
+  draft action ( features : instance ) Edit;
+  draft action Activate optimized;
+  draft action Resume;
+  draft action Discard;
+  draft determine action Prepare;
+
+  determination attach on modify { field Attachment; }
+
+  action ( features : instance ) ExcelUpload result [1] $self;
+
+  side effects
+  {
+    action ExcelUpload affects entity _SalesItem;
+  }
+
+  association _SalesItem { create; with draft; }
+
+  mapping for zsdge_dplst_ht1 corresponding;
+}
+
+define behavior for ZSD_II_DISPLAN alias SalesOrder
+persistent table zsdge_dplst_it1
+draft table zsdge_dplst_idt1
+lock dependent by _Head
+authorization dependent by _Head
+{
+  update ( features : instance );
+  delete ( features : instance );
+
+  field ( readonly ) Uuid, Salesorder, Salesorderitem, Slno, Dispatchdate, Plant, Customer, Vehicleno,
+                     Transmode, Material, Baseunit, Totalorderqty, Dispplantqty, Createdat, Createdby,
+                     Lastchangedat, Lastchangedby;
+
+  association _Head { with draft; }
+
+  mapping for zsdge_dplst_it1 corresponding;
+}

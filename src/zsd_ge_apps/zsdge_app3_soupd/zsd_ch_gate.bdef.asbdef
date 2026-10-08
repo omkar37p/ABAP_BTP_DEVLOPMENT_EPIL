@@ -1,0 +1,30 @@
+projection;
+strict ( 2 );
+use draft;
+use side effects;
+
+define behavior for ZSD_CH_GATE alias GateHead
+{
+  use update;
+
+  use action GateCheckIn;
+  use action Print;
+  use action SalesOrder;
+  use action CancelGateEntry;
+
+  use action Edit;
+  use action Activate;
+  use action Resume;
+  use action Discard;
+  use action Prepare;
+
+  use association _Item { create; with draft; }
+}
+
+define behavior for ZSD_CI_GATE alias GateItem
+{
+  use update;
+  use delete;
+
+  use association _Header { with draft; }
+}

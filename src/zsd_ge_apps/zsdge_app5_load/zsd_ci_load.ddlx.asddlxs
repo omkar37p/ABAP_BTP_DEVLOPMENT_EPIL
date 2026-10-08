@@ -1,0 +1,86 @@
+@Metadata.layer: #CUSTOMER
+@UI: { headerInfo: {
+typeName: 'Outgoing Loading - Material',
+typeNamePlural: 'Outgoing Loading - Material',
+title: { type: #STANDARD, value: 'Material' }
+}}
+@UI.createHidden: true
+@UI.updateHidden: true
+@UI.deleteHidden: true
+annotate entity ZSD_CI_LOAD with
+{
+  @UI.facet: [ { id: 'Header',
+                 purpose: #STANDARD,
+                 type: #IDENTIFICATION_REFERENCE,
+                 label: 'Dispatch Gate Item',
+                 position: 10 } ]
+  @UI.hidden: true
+  Uuid;
+
+  @UI: { lineItem:       [ { position: 10, label: 'Material' } ],
+         identification: [ { position: 10, label: 'Material' } ] }
+  @EndUserText.label: 'Material'
+  Material;
+
+  @UI: { lineItem:       [ { position: 20, label: 'Material Des' } ],
+         identification: [ { position: 20, label: 'Material Des' } ] }
+  @EndUserText.label: 'Material Des'
+  Materialdesc;
+
+  @UI: { lineItem:       [ { position: 25, label: 'Loading Checkbox' } ],
+         identification: [ { position: 25, label: 'Loading Checkbox' } ] }
+  @EndUserText.label: 'Loading Checkbox'
+  Loadcheck;
+
+  @UI: { lineItem:       [ { position: 30, label: 'Storage Loc' } ],
+         identification: [ { position: 30, label: 'Storage Loc' } ] }
+  @EndUserText.label: 'Storage Location'
+  @Consumption.valueHelpDefinition: [ { entity: { name: 'ZSD_SLOC_VH', element: 'Storagelocation' },
+                                      additionalBinding: [ { localElement: 'Plant', element: 'Plant', usage: #FILTER } ] } ]
+  Storagelocation;
+
+  @UI.hidden: true
+  Salesdocument;
+  @UI.hidden: true
+  Salesitem;
+  @UI.hidden: true
+  Customer;
+  @UI.hidden: true
+  Customername;
+  @UI.hidden: true
+  Gateentryno;
+  @UI.hidden: true
+  Plant;
+  @UI.hidden: true
+  Plantname;
+  @UI.hidden: true
+  Baseunit;
+  @UI.hidden: true
+  Batch;
+  @UI.hidden: true
+  Quantity;
+  @UI.hidden: true
+  Remark;
+  @UI.hidden: true
+  Tareweight;
+  @UI.hidden: true
+  Grossweight;
+  @UI.hidden: true
+  Netweight;
+  @UI.hidden: true
+  Itemimagecount;
+  @UI.hidden: true
+  Deliveryno;
+  @UI.hidden: true
+  Deliveritem;
+  @UI.hidden: true
+  Createdby;
+  @UI.hidden: true
+  Createdat;
+  @UI.hidden: true
+  Lastchangedby;
+  @UI.hidden: true
+  Lastchangedat;
+  @UI.hidden: true
+  _Head;
+}

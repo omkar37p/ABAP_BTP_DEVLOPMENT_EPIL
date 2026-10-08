@@ -1,0 +1,51 @@
+@Metadata.layer: #CUSTOMER
+@UI: { headerInfo: { typeName: 'Sales Dispatch Planning - Uploading',
+                     typeNamePlural: 'Sales Dispatch Planning - Uploading',
+                     title: { type: #STANDARD, value: 'Uuid' },
+                     description: { type: #STANDARD, value: 'UploadStatus' } } }
+annotate entity ZSD_CH_DISPLAN with
+{
+  @UI.facet: [ { id:            'Header',
+                 purpose:       #STANDARD,
+                 type:          #IDENTIFICATION_REFERENCE,
+                 label:         'Dispatch Plan Details',
+                 position:      10 },
+               { id:            'SalesHead',
+                 purpose:       #STANDARD,
+                 type:          #LINEITEM_REFERENCE,
+                 label:         'Order Details',
+                 position:      20,
+                 targetElement: '_SalesItem' } ]
+  @UI.hidden: true
+  Uuid;
+  @UI.hidden: true
+  Status;
+  @UI: { lineItem:       [ { position: 10, label: 'Upload Status' } ],
+         identification: [ { position: 10, label: 'Upload Status' },
+                           { type: #FOR_ACTION, dataAction: 'ExcelUpload', label: 'Excel Upload', position: 10 } ] }
+  @EndUserText.label: 'Upload Status'
+  UploadStatus;
+  @UI: { lineItem:       [ { position: 20, label: 'Created By' } ],
+         identification: [ { position: 20, label: 'Created By' } ] }
+  @EndUserText.label: 'Created By'
+  Createdby;
+  @UI: { lineItem:       [ { position: 30, label: 'Created Date' } ],
+         identification: [ { position: 30, label: 'Created Date' } ] }
+  @EndUserText.label: 'Created Date'
+  @UI.selectionField: [ { position: 10 } ]
+  Createdat;
+  @UI: { identification: [ { position: 40, label: 'Excel Attachment' } ] }
+  @EndUserText.label: 'Excel Attachment'
+  Attachment;
+  @UI.hidden: true
+  Minetype;
+  @UI.hidden: true
+  Filename;
+  @UI.hidden: true
+  Lastchangedby;
+  @UI.hidden: true
+  Lastchangedat;
+  @UI.hidden: true
+  /* Associations */
+  _SalesItem;
+}

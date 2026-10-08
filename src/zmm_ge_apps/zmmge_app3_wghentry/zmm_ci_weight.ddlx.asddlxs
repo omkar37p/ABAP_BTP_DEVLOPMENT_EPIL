@@ -1,0 +1,180 @@
+@Metadata.layer: #CUSTOMER
+@UI: { headerInfo: { typeName: 'Inventory Gate Item',
+                     typeNamePlural: 'Inventory Gate Item',
+                     title: { type: #STANDARD, value: 'Material' } } }
+@UI.deleteHidden: true
+@UI.createHidden: true
+annotate entity ZMM_CI_WEIGHT with
+{
+  @UI.facet: [ { id: 'Header',
+                 purpose: #STANDARD,
+                 type: #IDENTIFICATION_REFERENCE,
+                 label: 'Inventory Item',
+                 position: 10 } ]
+
+  @UI.hidden: true
+  Uuid;
+
+  @UI: { lineItem:       [ { position: 10, label: 'Item' },
+                           { type: #FOR_ACTION, dataAction: 'AutoFetchTWt', label: 'Auto Fetch Weight', position: 10 },
+                           { type: #FOR_ACTION, dataAction: 'ManualFetchTWt', label: 'Manual Weight', position: 20, invocationGrouping: #CHANGE_SET }
+  //                         { type: #FOR_ACTION, dataAction: 'GrossFetchTWt', label: 'Gross Weight', position: 30 }
+                         ],
+         identification: [ { position: 10, label: 'Item' }
+  //                         { type: #FOR_ACTION, dataAction: 'ImgCapture', label: 'Image Capture', position: 10 },
+  //                         { type: #FOR_ACTION, dataAction: 'AutoFetchTWt', label: 'Auto Fetch Weight', position: 20 },
+  //                         { type: #FOR_ACTION, dataAction: 'ManualFetchTWt', label: 'Manual Weight', position: 30 }
+                         ] }
+  @EndUserText.label: 'Order No'
+  Purchaseorderitem;
+
+  @UI: { lineItem:       [ { position: 20, label: 'Item Code' } ],
+         identification: [ { position: 20, label: 'Item Code' } ] }
+  @EndUserText.label: 'Item Code'
+  Material;
+
+  @UI: { lineItem:       [ { position: 25, label: 'Unloading Status' } ],
+         identification: [ { position: 25, label: 'Unloading Status' } ] }
+  @EndUserText.label: 'Unloading Status'
+  Unloadind;
+
+  @UI: { lineItem:       [ { position: 30, label: 'PO Order No' } ],
+         identification: [ { position: 30, label: 'PO Order No' } ] }
+  @EndUserText.label: 'PO Order No'
+  Purchaseorder;
+
+  @UI: { lineItem:       [ { position: 35, label: 'Sub Gate no' } ],
+         identification: [ { position: 35, label: 'Sub Gate no' } ] }
+  @EndUserText.label: 'Sub Gate no'
+  Subgateentryno;
+
+  @UI: { lineItem:       [ { position: 40, label: 'Supplier' } ],
+         identification: [ { position: 40, label: 'Supplier' } ] }
+  @EndUserText.label: 'Supplier'
+  Vendor;
+
+  @UI: { lineItem:       [ { position: 50, label: 'Quantity' } ],
+         identification: [ { position: 50, label: 'Quantity' } ] }
+  @EndUserText.label: 'Quantity'
+  Quantity;
+
+  @UI: { lineItem:       [ { position: 60, label: 'GRN/Revd Qty' } ],
+         identification: [ { position: 60, label: 'GRN/Revd Qty' } ] }
+  @EndUserText.label: 'GRN/Revd Qty'
+  Grnqty;
+
+  @UI: { lineItem:       [ { position: 70, label: 'Gross Weight' } ],
+         identification: [ { position: 70, label: 'Gross Weight' } ] }
+  @EndUserText.label: 'Gross Weight'
+  Grossweight;
+
+  @UI: { lineItem:       [ { position: 80, label: 'Tare Weight' } ],
+         identification: [ { position: 80, label: 'Tare Weight' } ] }
+  @EndUserText.label: 'Tare Weight'
+  Tareweight;
+
+  @UI: { lineItem:       [ { position: 90, label: 'Net Weight' } ],
+         identification: [ { position: 90, label: 'Net Weight' } ] }
+  @EndUserText.label: 'Net Weight'
+  Netweight;
+
+  @UI: { lineItem:       [ { position: 95, label: 'Challan No' } ],
+         identification: [ { position: 95, label: 'Challan No' } ] }
+  @EndUserText.label: 'Challan No'
+  Challanno;
+
+  @UI: { lineItem:       [ { position: 100, label: 'Challan Date' } ],
+         identification: [ { position: 100, label: 'Challan Date' } ] }
+  @EndUserText.label: 'Challan Date'
+  Challandate;
+
+  @UI: { lineItem:       [ { position: 105, label: 'Challan Tare Wt' } ],
+         identification: [ { position: 105, label: 'Challan Tare Wt' } ] }
+  @EndUserText.label: 'Challan Tare Wt'
+  Challantareweight;
+
+  @UI: { lineItem:       [ { position: 110, label: 'Challan Gross Wt' } ],
+         identification: [ { position: 110, label: 'Challan Gross Wt' } ] }
+  @EndUserText.label: 'Challan Gross Wt'
+  Challangrossweight;
+
+  @UI: { lineItem:       [ { position: 115, label: 'Challan Net Wt' } ],
+         identification: [ { position: 115, label: 'Challan Net Wt' } ] }
+  @EndUserText.label: 'Challan Net Wt'
+  Challannetweight;
+
+  @UI: { lineItem:       [ { position: 120, label: 'Challan Qty' } ],
+         identification: [ { position: 120, label: 'Challan Qty' } ] }
+  @EndUserText.label: 'Challan Qty'
+  Challanqty;
+
+  @UI: { lineItem:       [ { position: 130, label: 'PO Order Type' } ],
+         identification: [ { position: 130, label: 'PO Order Type' } ] }
+  @EndUserText.label: 'PO Order Type'
+  Poordertype;
+
+  @UI: { lineItem:       [ { position: 140, label: 'Eway Billno' } ],
+         identification: [ { position: 140, label: 'Eway Billno' } ] }
+  @EndUserText.label: 'Eway Billno'
+  Ewaybillno;
+
+  @UI: { lineItem:       [ { position: 150, label: 'Eway BillDate' } ],
+         identification: [ { position: 150, label: 'Eway BillDate' } ] }
+  @EndUserText.label: 'Eway BillDate'
+  Ewaybilldate;
+
+  @UI: { lineItem:       [ { position: 160, label: 'Purchase Document' } ],
+         identification: [ { position: 160, label: 'Purchase Document' } ] }
+  @EndUserText.label: 'Purchase Document'
+  Podocumt;
+
+  @UI: { lineItem:       [ { position: 170, label: 'Challan Document' } ],
+         identification: [ { position: 170, label: 'Challan Document' } ] }
+  @EndUserText.label: 'Challan Document'
+  Chdocumt;
+
+  @UI: { lineItem:       [ { position: 180, label: 'Quality document' } ],
+         identification: [ { position: 180, label: 'Quality document' } ] }
+  @EndUserText.label: 'Quality document'
+  Qadocumt;
+  
+  @UI: { lineItem:       [ { position: 190, label: 'Remark' } ],
+         identification: [ { position: 190, label: 'Remark' } ] }
+  @EndUserText.label: 'Remark'
+  Remark;
+    @UI: { lineItem:       [ { position: 200, label: 'Weigment Date' } ],
+         identification: [ { position: 200, label: 'Weigment Date' } ] }
+  @EndUserText.label: 'Weigment Date'
+  Weighmentdate;
+    @UI: { lineItem:       [ { position: 210, label: 'Weigment Time' } ],
+         identification: [ { position: 210, label: 'Weigment Time' } ] }
+  @EndUserText.label: 'Weigment Time'
+  Weighmenttime;
+  @UI.hidden: true
+  Materialgroup;
+  @UI.hidden: true
+  Poordertypetext;
+  @UI.hidden: true
+  Suppliername;
+  @UI.hidden: true
+  Gateentryno;
+  @UI.hidden: true
+  Materialtext;
+  @UI.hidden: true
+  Plant;
+  @UI.hidden: true
+  Plantname;
+  @UI.hidden: true
+  Baseunit;
+  @UI.hidden: true
+  Createdby;
+  @UI.hidden: true
+  Createdat;
+  @UI.hidden: true
+  Lastchangedby;
+  @UI.hidden: true
+  Lastchangedat;
+  @UI.hidden: true
+  /* Associations */
+  _Head;
+}

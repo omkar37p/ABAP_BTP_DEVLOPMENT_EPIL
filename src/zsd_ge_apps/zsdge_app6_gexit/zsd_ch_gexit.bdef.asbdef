@@ -1,0 +1,26 @@
+projection;
+strict ( 2 );
+use draft;
+
+define behavior for ZSD_CH_GEXIT alias ExitHead
+{
+  use update;
+
+  use action ImageVald;
+  use action GateExit;
+
+  use action Edit;
+  use action Activate;
+  use action Resume;
+  use action Discard;
+  use action Prepare;
+
+  use association _Item { with draft; }
+}
+
+define behavior for ZSD_CI_GEXIT alias ExitItem
+{
+  use update;
+
+  use association _Head { with draft; }
+}

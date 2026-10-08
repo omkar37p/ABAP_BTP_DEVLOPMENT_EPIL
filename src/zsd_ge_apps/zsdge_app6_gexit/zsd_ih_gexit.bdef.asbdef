@@ -1,0 +1,59 @@
+managed implementation in class zbp_sd_ih_gexit unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZSD_IH_GEXIT alias ExitHead
+persistent table zsdge_sentry_ht1
+draft table zsdge_sgex_dht
+lock master
+total etag Lastchangedat
+authorization master ( instance )
+etag master Lastchangedat
+{
+  update ( features : instance );
+  // create / delete: owned by Security Entry (zsdge_sentry_ht1 is shared)
+
+  field ( readonly ) Uuid;
+  field ( readonly ) Gateno, Gatenodes, Plant, Plantname, Gateentryid, Gateentryiddate, Gateentryidtime,
+  Gateentrytype, Gateentrytypetext, Gateentryno, Gateentrysequence, Gateentrydate,
+  Gateentrytime, Transportid, Transportname, Vehicleno, Packingdetails, Dispinstrdetails,
+  Contactdetails, Drivername, Driveraddress, Driverlicensenumber, Drivermobile, Remarks,
+  Customer, Customername, Fromplace, Billingfrom, Consignee, Billto, Broker, Doremark,
+  Division, Attachment, Mimetype, Filename, Weigmentindicator, Weighmentindicator,
+  Weighmentmcno, Weighmentmcndes, Weighmentdate, Weighmenttime, Weighuom, Tarewt,
+  Transferexit, Gateexitdate, Gateexittime, Exitindic, Imagevalid, Billingdocument,
+  Billingdocumentdate, Einvoiceno, Einvoicedate, Ewaybillno, Ewaybilldate, Cancelgateentry,
+  Createdby, Createdat, Lastchangedby, Lastchangedat;
+
+  association _Item { with draft; }
+
+  draft action ( features : instance ) Edit;
+  draft action Activate optimized;
+  draft action Resume;
+  draft action Discard;
+  draft determine action Prepare;
+
+  action ( features : instance ) ImageVald result [1] $self;
+  action ( features : instance ) GateExit result [1] $self;
+
+  mapping for zsdge_sentry_ht1 corresponding;
+}
+
+define behavior for ZSD_II_GEXIT alias ExitItem
+persistent table zsdge_sentry_it1
+draft table zsdge_sgex_idt
+lock dependent by _Head
+authorization dependent by _Head
+{
+  update;
+  // create / delete: owned by Sales Order Update
+
+  field ( readonly ) Uuid, Salesdocument, Salesitem;
+  field ( readonly ) Customer, Customername, Gateentryno, Plant, Plantname, Material, Materialdesc,
+  Baseunit, Batch, Quantity, Remark, Tareweight, Grossweight, Netweight,
+  Createdby, Createdat, Lastchangedby, Lastchangedat;
+
+  association _Head { with draft; }
+
+  mapping for zsdge_sentry_it1 corresponding;
+}

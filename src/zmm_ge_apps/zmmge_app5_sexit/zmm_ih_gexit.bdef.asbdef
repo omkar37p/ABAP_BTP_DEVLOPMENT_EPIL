@@ -1,0 +1,61 @@
+managed implementation in class zbp_mm_ih_gexit unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZMM_IH_GEXIT alias GateExitHead
+persistent table zmmge_hdr_t01
+draft table zmmge_gext_hd
+lock master
+total etag Lastchangedat
+authorization master ( instance )
+etag master Lastchangedat
+{
+  update ( features : instance );
+  // create / delete: owned by the Gate Entry app (zmmge_hdr_t01 is shared)
+
+  field ( readonly ) Uuid;
+  field ( readonly ) Gateno, Gatenodes, Gateentryno, Gateentryseqno, Gateentrydate, Gateentrytime,
+  Gateentryid, Gateentryiddate, Plant, Plantname, Gateentryseries, Gateentryseriesdes,
+  Permitno, Tokenentryno, Erpreferenceno, Trasporterid, Trasportername, Vehicleno,
+  Vehicletype, Drivername, Mobile, Licenseno, Experiredt, Chaseno, Address, Challanno,
+  Challandate, Lrno, Lrdate, Securityremarks, Referno, Referdate, Fromplace, Toplace,
+  Freightorderno, Helpername, Minepassno, Forestpassno, Rakecontno, Createdname,
+  Weighmentindicator, Weighmentmcno, Weighmentmcndes, Weighuom, Grosswt, Weighmentdate,
+  Weighmenttime, Imagevaldindicator, Gateexitdate, Gateexittime, Gateexitindicator,
+  Exitindicator, Createdby, Createdat, Lastchangedby, Lastchangedat;
+
+  association _Item { create; with draft; }
+
+  draft action ( features : instance ) Edit;
+  draft action Activate optimized;
+  draft action Resume;
+  draft action Discard;
+  draft determine action Prepare;
+
+  action ( features : instance ) GateExit result [1] $self;
+  action ( features : instance ) ImageVald result [1] $self;
+
+  mapping for zmmge_hdr_t01 corresponding;
+}
+
+define behavior for ZMM_II_GEXIT alias GateExitItem
+persistent table zmmge_itm_t01
+draft table zmmge_gext_id
+lock dependent by _Head
+authorization dependent by _Head
+{
+  update ( features : instance );
+  delete ( features : instance );
+
+  field ( readonly ) Uuid, Purchaseorder, Purchaseorderitem;
+  field ( readonly ) Vendor, Suppliername, Gateentryno, Subgateentryno, Material, Materialtext, Plant,
+  Plantname, Baseunit, Quantity, Remark, Weiuom, Tareweight, Grossweight, Netweight,
+  Challanno, Challandate, Chbaseunit, Challangrossweight, Challantareweight,
+  Challannetweight, Chqtyunit, Challanqty, Poordertype, Poordertypetext, Ewaybillno,
+  Ewaybilldate, Orderdate, Podocumt, Chdocumt, Sidocumt, Qadocumt,
+  Createdby, Createdat, Lastchangedby, Lastchangedat;
+
+  association _Head { with draft; }
+
+  mapping for zmmge_itm_t01 corresponding;
+}

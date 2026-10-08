@@ -1,0 +1,5 @@
+@EndUserText.label: 'Inward Security Gate Entry - Service'
+define service ZMMGE_APP1_SD {
+  expose ZMMGE_APP1_PE   as SecEntry;
+  expose ZMMGE_I_PLANTVH as PlantVH;
+}

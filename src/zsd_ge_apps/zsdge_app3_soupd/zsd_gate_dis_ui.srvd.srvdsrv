@@ -1,0 +1,8 @@
+@EndUserText.label: 'Outward Gate Entry - Order Update App'
+define service ZSD_GATE_DIS_UI {
+  expose ZSD_CH_GATE      as MainHead;
+  expose ZSD_CI_GATE      as MainItem;
+  expose ZSD_SOUPD_CUSTVH as CustomerVH;
+  expose ZSD_ORDER_VH     as SalesOrderVH;
+  expose ZSD_ORDERITEM_VH as SalesOrderItemVH;
+}

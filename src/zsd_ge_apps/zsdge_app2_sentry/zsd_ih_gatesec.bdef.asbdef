@@ -1,0 +1,57 @@
+managed implementation in class zbp_sd_ih_gatesec unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZSD_IH_GATESEC alias GateSecHead
+persistent table zsdge_sentry_ht1
+draft table zsdge_sentry_dht
+lock master
+total etag Lastchangedat
+authorization master ( instance )
+etag master Lastchangedat
+{
+  create ( authorization : global );
+  update ( features : instance );
+  delete ( features : instance );
+
+  field ( readonly, numbering : managed ) Uuid;
+  field ( readonly : update ) Gateno, Plant, Gateentrytype, Modeoftransport;
+  field ( readonly ) Gateentryid, Gateentryiddate, Gateentryidtime, Gateentryno, Division,
+  Modeoftransporttext, Gateentrytypetext, Gatenodes,
+  Gateentrysequence, Gateentrytime, Gateentrydate, Customer, Customername,
+  Createdat, Createdby, Lastchangedat, Lastchangedby,
+  Vehicletype, Attachment, Mimetype, Filename;
+
+  draft action ( features : instance ) Edit;
+  draft action Activate optimized;
+  draft action Resume;
+  draft action Discard;
+  draft determine action Prepare;
+
+  action ( features : instance ) GatePrint result [1] $self;
+
+  determination headmodify on save { create; }
+
+  association _Item { create; with draft; }
+
+  mapping for zsdge_sentry_ht1 corresponding;
+}
+
+define behavior for ZSD_II_GATESEC alias GateSecItem
+persistent table zsdge_sentry_it1
+draft table zsdge_sentry_idt
+lock dependent by _Header
+authorization dependent by _Header
+{
+  update ( features : instance );
+  delete ( features : instance );
+
+  field ( readonly ) Uuid, Salesdocument, Salesitem, Customer, Customername, Plant, Plantname,
+  Gateentryno, Material, Materialdesc, Baseunit, Quantity, Tareweight,
+  Grossweight, Netweight, Createdat, Createdby, Lastchangedat, Lastchangedby,
+  Openqty, Remark;
+
+  association _Header { with draft; }
+
+  mapping for zsdge_sentry_it1 corresponding;
+}

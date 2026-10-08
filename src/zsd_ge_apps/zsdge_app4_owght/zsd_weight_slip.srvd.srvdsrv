@@ -1,0 +1,4 @@
+@EndUserText.label: 'Outgoing Weighment Slip - SD'
+define service ZSD_WEIGHT_SLIP {
+  expose ZSD_CE_WEIGHT as WeighmentSlip;
+}

@@ -1,0 +1,35 @@
+projection;
+strict ( 2 );
+use draft;
+
+define behavior for ZMM_CH_WEIGHT alias WeightHead
+{
+  use update;
+
+  use action FirstImg;
+  use action SecondImg;
+  use action AutoFetchWt;
+  use action ManualFetchWt;
+  use action ImageValid;
+  use action Weighmentform;
+
+  use action Edit;
+  use action Activate;
+  use action Resume;
+  use action Discard;
+  use action Prepare;
+
+  use association _Item { create; with draft; }
+}
+
+define behavior for ZMM_CI_WEIGHT alias WeightItem
+{
+  use update;
+  use delete;
+
+  use action AutoFetchTWt;
+  use action ManualFetchTWt;
+  use action ImgCapture;
+
+  use association _Head { with draft; }
+}

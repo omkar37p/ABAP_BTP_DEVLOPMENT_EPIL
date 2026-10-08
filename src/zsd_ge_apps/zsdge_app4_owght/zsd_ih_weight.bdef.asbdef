@@ -1,0 +1,84 @@
+managed implementation in class zbp_sd_ih_weight unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZSD_IH_WEIGHT alias WeightHead
+persistent table zsdge_sentry_ht1
+draft table zsdge_owght_dht
+lock master
+total etag Lastchangedat
+authorization master ( instance )
+etag master Lastchangedat
+{
+  update ( features : instance );
+  // create / delete: owned by Security Entry (zsdge_sentry_ht1 is shared)
+
+  field ( readonly ) Uuid;
+  field ( readonly ) Gateno, Gatenodes, Plant, Plantname, Gateentryid, Gateentryiddate, Cancelgateentry,
+  Gateentryidtime, Gateentrytype, Gateentrytypetext, Gateentryno, Gateentrysequence,
+  Gateentrydate, Gateentrytime, Transportid, Transportname, Vehicleno, Packingdetails,
+  Dispinstrdetails, Contactdetails, Drivername, Driveraddress, Driverlicensenumber,
+  Drivermobile, Remarks, Customer, Customername, Fromplace, Billingfrom, Consignee,
+  Billto, Broker, Doremark, Division, Attachment, Mimetype, Filename, Attachmentwt,
+  Mimetypewt, Filenamewt, Weigmentindicator, Weighmentindicator, Weighmentmcno,
+  Weighmentmcndes, Weighmentdate, Weighmenttime, Weighuom, Tarewt, Deliveryno,
+  Materialdocument, Materialdocumentyear, Picqtindicator, Gateentrystatus, Criticality,
+  Createdby, Createdat, Lastchangedby, Lastchangedat;
+  field ( readonly ) Imgseqnotare, Imgseqnogross, Imgvrstatustare, Imgvrstatusgross, Imgrejreason,
+  Imgstatustaretext, Imgcrittare, Imgstatusgrosstext, Imgcritgross;
+
+  association _Item { with draft; }
+
+  draft action ( features : instance ) Edit;
+  draft action Activate optimized;
+  draft action Resume;
+  draft action Discard;
+  draft determine action Prepare;
+
+  action ( features : instance ) Weighmentslip result [1] $self;
+  action ( features : instance ) CancelGateEntry result [1] $self;
+  action ( features : instance ) AutoFetchWt parameter ZSD_AUTOWT_INP result [1] $self;
+  action ( features : instance ) ManualFetchWt parameter ZSD_WEIGHT_INP result [1] $self;
+
+  action ( features : instance ) CrtDelivery result [1] $self;
+  action ( features : instance ) UpDlyheadertext result [1] $self;
+  action ( features : instance ) PickingQty result [1] $self;
+  action ( features : instance ) DeliveryPG result [1] $self;
+  action ( features : instance ) TransExit result [1] $self;
+  action ( features : instance ) RecaptureTare parameter ZSD_AUTOWT_INP result [1] $self;
+  action ( features : instance ) RecaptureGross parameter ZSD_AUTOWT_INP result [1] $self;
+
+  side effects
+  {
+    action ManualFetchWt affects $self, entity _Item;
+    action AutoFetchWt affects $self, entity _Item;
+    action RecaptureTare affects $self;
+    action RecaptureGross affects $self;
+  }
+
+  mapping for zsdge_sentry_ht1 corresponding;
+}
+
+define behavior for ZSD_II_WEIGHT alias WeightItem
+persistent table zsdge_sentry_it1
+draft table zsdge_owght_idt
+lock dependent by _Head
+authorization dependent by _Head
+{
+  update;
+  // create / delete: owned by Sales Order Update
+
+  field ( readonly ) Uuid, Salesdocument, Salesitem;
+  field ( readonly ) Customer, Customername, Gateentryno, Plant, Plantname, Material, Materialdesc,
+  Baseunit, Batch, Quantity, Remark, Tareweight, Grossweight, Netweight, Deliveryno,
+  Deliveritem, Independentrequirementtype, OpenQty, Weighmentmcno, Weighmentmcndes,
+  Createdby, Createdat, Lastchangedby, Lastchangedat;
+
+  association _Head { with draft; }
+
+  action ( features : instance, authorization : update ) AutoFetchTWt parameter ZSD_AUTOWT_INP result [1] $self;
+  action ( features : instance, authorization : update ) ManualFetchTWt parameter ZSD_WEIGHT_INP result [1] $self;
+  action ( features : instance, authorization : update ) ImgCapture result [1] $self;
+
+  mapping for zsdge_sentry_it1 corresponding;
+}
